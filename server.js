@@ -18,16 +18,16 @@ app.use(express.json())
 // static paths (ex. assets, js, images, etc) served automatically from:
 app.use(express.static(STATIC_PATH))
 
-app.get('*', function(req, res) {
-  res.sendFile('index.html', {root: STATIC_PATH});
-});
-
-
-app.get('*', function (req, res) {
-  res.sendFile('index.html', { root: path.join(__dirname, '../../client/build/') });
-});
-
 apiRouter(app, API_URL, STATIC_PATH)
+
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+     res.sendFile(path.join(__dirname, './client/build/index.html'))
+  })
+  console.log('!! Be sure to run "npm run build" to prepare production react code!')
+}
+
+
 
 app.listen(PORT, function () {
   console.log(`Serving app on: ${API_URL} (port: ${PORT})`)

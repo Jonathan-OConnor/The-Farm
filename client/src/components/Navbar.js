@@ -2,7 +2,6 @@
 import React from "react"
 
 function Navbar(props) {
-    console.log(props.active)
     function active() {
         switch (props.active) {
             case "home":
@@ -10,13 +9,13 @@ function Navbar(props) {
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                     <a class="nav-link" href="/calendar">Calendar</a>
                 </div>)
-                break
+         
             case "calendar":
                 return (<div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="/">Home</a>
                     <a class="nav-link active" href="/calendar">Calendar</a>
                 </div>)
-                break
+                
             default: 
                 return(<div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="/">Home</a>
