@@ -27,7 +27,27 @@ function Calendar() {
                     'Session': localStorage.session || ''
                 }
             }).then(res => res.json())
-            setEvents(eventList)
+            // add yearly recurring events
+            const yearlyArray = []
+            for (var i = 0; i < eventList.length; i++){
+                if (eventList[i].yearly){
+                    const startYear = parseInt(eventList[i].date.substring(0,4))
+                    const endString = eventList[i].date.substring(4, eventList[i].date.length)
+                    for (var j = 1; j < 31; j++){
+                        const newYear = startYear + j
+                        const newDate = newYear.toString() + endString
+                        const event = {
+                            date: newDate,
+                            title: eventList[i].title,
+                            description: eventList[i].description
+                        }
+                        yearlyArray.push(event)
+                    }
+                }
+             
+            }
+            const final = [...eventList, ...yearlyArray]
+            setEvents(final)
             setLoading(false)
         }
         getEvents()

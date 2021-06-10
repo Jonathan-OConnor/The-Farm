@@ -14,6 +14,10 @@ const events = new Schema(
         description:{
             type: String,
             trim: true
+        },
+        yearly:{
+            type: Boolean,
+            default: false
         }
     }
 )

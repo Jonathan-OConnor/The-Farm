@@ -8,6 +8,7 @@ function CalendarModal(props) {
     const [eventCreationError, setEventCreationError] = useState(false)
     const [eventCreationLoading, setEventCreationLoading] = useState(false)
     const [eventCreationDone, setEventCreationDone] = useState(false)
+    const [isYearly, isYearlyToggle] = useState(false)
     const [modalStyle, setModalStyle] = useState(getModalStyle)
 
     // modal styling
@@ -32,7 +33,12 @@ function CalendarModal(props) {
     const classes = useStyles();
 
     async function createEvent() {
-        const data = { date: props.selectedDate, title: document.getElementById("event-name").value, description: document.getElementById("event-desc").value }
+        const data = { 
+            date: props.selectedDate, 
+            title: document.getElementById("event-name").value, 
+            description: document.getElementById("event-desc").value ,
+            yearly: isYearly,
+        }
         setEventCreationLoading(true)
         const response = await fetch('/api/event', {
             method: 'post',
@@ -41,7 +47,7 @@ function CalendarModal(props) {
                 'Session': localStorage.session || ''
             },
             body: JSON.stringify(data)
-        }).then(res=> res.json())
+        }).then(res => res.json())
         setEventCreationLoading(false)
         if (!response.status) {
             setEventCreationError(true)
@@ -51,6 +57,10 @@ function CalendarModal(props) {
             props.closeModal()
             setEventCreationDone(true)
         }
+    }
+
+    function toggleYearly(){
+        isYearlyToggle(!isYearly)
     }
 
     return (
@@ -66,6 +76,13 @@ function CalendarModal(props) {
                     <label for="event-desc">Event Description:</label>
                     <textarea id="event-desc" name="event-desc" rows="4" cols="50" ></textarea>
                 </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="yearlyEventCheck">
+                        Yearly Event
+                    </label>
+                    <input class="form-check-input" type="checkbox" value="" id="yearlyEventCheck" onClick={toggleYearly}/>
+                </div>
+
                 <button className="btn btn-primary" onClick={createEvent}>{eventCreationLoading ? <CircularProgress color="black" /> : eventCreationDone ? <DoneIcon /> : "Submit"} </button>
             </div>
         </div>
