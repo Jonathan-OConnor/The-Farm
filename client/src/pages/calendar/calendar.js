@@ -28,24 +28,7 @@ function Calendar() {
                 }
             }).then(res => res.json())
             // add yearly recurring events
-            const yearlyArray = []
-            for (var i = 0; i < eventList.length; i++){
-                if (eventList[i].yearly){
-                    const startYear = parseInt(eventList[i].date.substring(0,4))
-                    const endString = eventList[i].date.substring(4, eventList[i].date.length)
-                    for (var j = 1; j < 31; j++){
-                        const newYear = startYear + j
-                        const newDate = newYear.toString() + endString
-                        const event = {
-                            date: newDate,
-                            title: eventList[i].title,
-                            description: eventList[i].description
-                        }
-                        yearlyArray.push(event)
-                    }
-                }
-             
-            }
+            const yearlyArray = addYearlies(eventList)
             const final = [...eventList, ...yearlyArray]
             setEvents(final)
             setLoading(false)
@@ -66,9 +49,31 @@ function Calendar() {
         setTimeout(() => { setOpen(false) }, 300)
     }
     function addEvent(newEvent) {
-        setEvents([...events, newEvent])
+        const newYearly = addYearlies([newEvent])
+        console.log(newYearly)
+        setEvents([...events, newEvent, ...newYearly])
     }
 
+    function addYearlies(eventList) {
+        const yearlyArray = []
+        for (var i = 0; i < eventList.length; i++) {
+            if (eventList[i].yearly) {
+                const startYear = parseInt(eventList[i].date.substring(0, 4))
+                const endString = eventList[i].date.substring(4, eventList[i].date.length)
+                for (var j = 1; j < 31; j++) {
+                    const newYear = startYear + j
+                    const newDate = newYear.toString() + endString
+                    const event = {
+                        date: newDate,
+                        title: eventList[i].title,
+                        description: eventList[i].description
+                    }
+                    yearlyArray.push(event)
+                }
+            }
+        }
+        return yearlyArray
+    }
     // component render
     return (
         <div>

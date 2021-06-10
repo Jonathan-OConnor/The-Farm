@@ -10,9 +10,10 @@ async function createEvent(eventData) {
     const saveData = {
         date: eventData.date,
         title: eventData.title,
-        description: eventData.description || ''
+        description: eventData.description || '',
+        yearly: eventData.yearly || false
     }
-    const savedEvent = await db.events.create(eventData)
+    const savedEvent = await db.events.create(saveData)
     if (!savedEvent._id) {
         return { status: false, message: "failed to create event entry" }
     }
@@ -23,7 +24,8 @@ async function createEvent(eventData) {
             id: savedEvent._id,
             date: savedEvent.date,
             title: savedEvent.title,
-            description: savedEvent.description
+            description: savedEvent.description,
+            yearly: savedEvent.yearly,
          
         }
     }
