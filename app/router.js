@@ -8,10 +8,14 @@ function router(app, API_URL, STATIC_PATH) {
    })
    
    app.get('/api/event', async function(req, res){
-       console.log('running')
        const {status, message, eventList} = await orm.getAllEvents()
        res.send({status, message, eventList})
        console.log('sent event list')
+   })
+   app.put('/api/event', async function(req, res){
+       const {status, message, eventData} = await orm.updateEvent(req.body)
+       res.send({status, message})
+       console.log('updated entry')
    })
 }
 

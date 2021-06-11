@@ -5,6 +5,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 function CalendarCreationModal(props) {
 
+    const [eventEditLoading, setEventEditLoading] = useState(false)
+    const [eventEditDone, setEventEditDone] = useState(false)
     const [modalStyle, setModalStyle] = useState(getModalStyle)
 
     // modal styling
@@ -28,6 +30,25 @@ function CalendarCreationModal(props) {
     }));
     const classes = useStyles();
 
+    async function editEvent(){
+        setEventEditLoading(true)
+        const data = { 
+            date: props.selectedEvent.startStr, 
+            title: document.getElementById("edit-name").value, 
+            description: document.getElementById("edit-desc").value,
+            yearly: props.selectedEvent.extendedProps.yearly,
+            _id: props.selectedEvent.extendedProps._id
+        }
+        const response = await fetch('/api/event', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session': localStorage.session || ''
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+   
+    }
    
 
     return (
@@ -38,12 +59,12 @@ function CalendarCreationModal(props) {
                     Event Selected: {props.selectedEvent.title}
                 </p>
                 <label for="event-name">Event Name:</label>
-                <input type="text" id="event-name" name="event-name" defaultValue={props.selectedEvent.title}></input>
+                <input type="text" id="edit-name" name="edit-name" defaultValue={props.selectedEvent.title}></input>
                 <div className="row">
                     <label for="event-desc">Event Description:</label>
-                    <textarea id="event-desc" name="event-desc" rows="4" cols="50" defaultValue={props.selectedEvent.extendedProps.description}></textarea>
+                    <textarea id="edit-desc" name="edit-desc" rows="4" cols="50" defaultValue={props.selectedEvent.extendedProps.description}></textarea>
                 </div>
-                <button className="btn btn-primary" > Save Edit </button>
+                <button className="btn btn-primary" onClick={editEvent}>{eventEditLoading ? <CircularProgress color="black" /> : eventEditDone ? <DoneIcon /> : "Save Edit"} </button>
             </div>
         </div>
     )

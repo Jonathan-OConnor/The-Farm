@@ -26,7 +26,7 @@ async function createEvent(eventData) {
             title: savedEvent.title,
             description: savedEvent.description,
             yearly: savedEvent.yearly,
-         
+
         }
     }
 }
@@ -40,7 +40,28 @@ async function getAllEvents() {
     }
 }
 
-module.exports = {
-    createEvent,
-    getAllEvents,
-}
+async function updateEvent(eventData) {
+    const saveData = {
+        date: eventData.date,
+        title: eventData.title,
+        description: eventData.description || '',
+        yearly: eventData.yearly || false
+    }
+    const updatedEvent = await db.events.updateOne({ "_id": ObjectId(eventData._id) }, { $set: { "date": saveData.date, "title": saveData.title, "description": saveData.description, "yearly": saveData.yearly } })
+    if (updatedEvent.matchedCount === 1) {
+        return {
+            status: true,
+            message: "Event successfully updated",
+            }
+        } else {
+            return {
+                status: false,
+                message: "Event was not updated",
+                }
+        }
+    }
+    module.exports = {
+        createEvent,
+        getAllEvents,
+        updateEvent
+    }

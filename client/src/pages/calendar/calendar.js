@@ -52,7 +52,9 @@ function Calendar() {
                     const event = {
                         date: newDate,
                         title: eventList[i].title,
-                        description: eventList[i].description
+                        description: eventList[i].description,
+                        _id: eventList[i]._id,
+                        yearly: eventList[i].yearly
                     }
                     yearlyArray.push(event)
                 }
