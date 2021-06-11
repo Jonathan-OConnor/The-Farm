@@ -82,6 +82,7 @@ function Calendar() {
 
     // editing modal functions
     function openEditingModal(info){
+        console.log(info.event)
         setSelectedEvent(info.event)
         setOpenEditing(true)
     }

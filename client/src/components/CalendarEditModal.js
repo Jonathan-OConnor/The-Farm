@@ -41,7 +41,7 @@ function CalendarCreationModal(props) {
                 <input type="text" id="event-name" name="event-name" defaultValue={props.selectedEvent.title}></input>
                 <div className="row">
                     <label for="event-desc">Event Description:</label>
-                    <textarea id="event-desc" name="event-desc" rows="4" cols="50" defaultValue={props.selectedEvent.description}></textarea>
+                    <textarea id="event-desc" name="event-desc" rows="4" cols="50" defaultValue={props.selectedEvent.extendedProps.description}></textarea>
                 </div>
                 <button className="btn btn-primary" > Save Edit </button>
             </div>
