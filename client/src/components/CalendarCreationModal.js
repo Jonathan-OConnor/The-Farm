@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DoneIcon from '@material-ui/icons/Done'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-function CalendarModal(props) {
+function CalendarCreationModal(props) {
 
     const [eventCreationError, setEventCreationError] = useState(false)
     const [eventCreationLoading, setEventCreationLoading] = useState(false)
@@ -89,4 +89,4 @@ function CalendarModal(props) {
     )
 }
 
-export default CalendarModal
+export default CalendarCreationModal

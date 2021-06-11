@@ -6,7 +6,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
 import Navbar from "../../components/Navbar"
-import CalendarModal from "../../components/CalendarModal"
+import CalendarCreationModal from "../../components/CalendarCreationModal"
+import CalendarEditModal from "../../components/CalendarEditModal"
 import "./calendar.css"
 
 
@@ -14,9 +15,11 @@ function Calendar() {
 
     // react state initialization
     const [loading, setLoading] = useState(true)
-    const [open, setOpen] = useState(false)
+    const [openCreation, setOpenCreation] = useState(false)
+    const [openEditing, setOpenEditing] = useState(false)
     const [events, setEvents] = useState([])
     const [selectedDate, setSelectedDate] = useState("")
+    const [selectedEvent, setSelectedEvent] = useState("")
 
     useEffect(() => {
         async function getEvents() {
@@ -37,23 +40,6 @@ function Calendar() {
     }, [])
 
     // page javascript functions
-    function openModal(arg) {
-        setSelectedDate(arg.dateStr)
-        setOpen(true)
-    }
-    function handleClose() {
-        setOpen(false)
-    }
-
-    function closeModal() {
-        setTimeout(() => { setOpen(false) }, 300)
-    }
-    function addEvent(newEvent) {
-        const newYearly = addYearlies([newEvent])
-        console.log(newYearly)
-        setEvents([...events, newEvent, ...newYearly])
-    }
-
     function addYearlies(eventList) {
         const yearlyArray = []
         for (var i = 0; i < eventList.length; i++) {
@@ -74,6 +60,34 @@ function Calendar() {
         }
         return yearlyArray
     }
+
+    // creation modal functions
+    function openCreationModal(arg) {
+        setSelectedDate(arg.dateStr)
+        setOpenCreation(true)
+    }
+    function handleCreationClose() {
+        setOpenCreation(false)
+    }
+
+    function closeCreationModal() {
+        setTimeout(() => { setOpenCreation(false) }, 300)
+    }
+
+    function addEvent(newEvent) {
+        const newYearly = addYearlies([newEvent])
+        console.log(newYearly)
+        setEvents([...events, newEvent, ...newYearly])
+    }
+
+    // editing modal functions
+    function openEditingModal(info){
+        setSelectedEvent(info.event)
+        setOpenEditing(true)
+    }
+    function handleEditingClose(){
+        setOpenEditing(false)
+    }
     // component render
     return (
         <div>
@@ -84,13 +98,21 @@ function Calendar() {
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
                         events={events}
-                        dateClick={openModal}
+                        dateClick={openCreationModal}
+                        eventClick={openEditingModal}
                     />}
                 </Grow>
+                {/* Event Creation Modal */}
                 <Modal
-                    open={open}
-                    onClose={handleClose}>
-                    <CalendarModal selectedDate={selectedDate} closeModal={closeModal} addEvent={addEvent} />
+                    open={openCreation}
+                    onClose={handleCreationClose}>
+                    <CalendarCreationModal selectedDate={selectedDate} closeModal={closeCreationModal} addEvent={addEvent} />
+                </Modal>
+                {/* Event Editing Modal */}
+                <Modal
+                    open={openEditing}
+                    onClose={handleEditingClose}>
+                    <CalendarEditModal selectedEvent={selectedEvent}/>
                 </Modal>
             </div>
         </div >
