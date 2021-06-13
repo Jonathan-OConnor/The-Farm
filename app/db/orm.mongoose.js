@@ -52,16 +52,17 @@ async function updateEvent(eventData) {
         return {
             status: true,
             message: "Event successfully updated",
-            }
-        } else {
-            return {
-                status: false,
-                message: "Event was not updated",
-                }
         }
     }
-    module.exports = {
-        createEvent,
-        getAllEvents,
-        updateEvent
+    else {
+        return {
+            status: false,
+            message: "Event was not updated",
+        }
     }
+}
+module.exports = {
+    createEvent,
+    getAllEvents,
+    updateEvent
+}

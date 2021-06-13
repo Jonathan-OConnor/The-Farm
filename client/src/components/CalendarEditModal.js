@@ -7,8 +7,8 @@ function CalendarCreationModal(props) {
 
     const [eventEditLoading, setEventEditLoading] = useState(false)
     const [eventEditDone, setEventEditDone] = useState(false)
+    const [isYearly, setIsYearly] = useState(props.selectedEvent.extendedProps.yearly)
     const [modalStyle, setModalStyle] = useState(getModalStyle)
-
     // modal styling
     function getModalStyle() {
         return {
@@ -30,13 +30,17 @@ function CalendarCreationModal(props) {
     }));
     const classes = useStyles();
 
+    function toggleYearly(){
+        setIsYearly(!isYearly)
+    }
+
     async function editEvent(){
         setEventEditLoading(true)
         const data = { 
             date: props.selectedEvent.startStr, 
             title: document.getElementById("edit-name").value, 
             description: document.getElementById("edit-desc").value,
-            yearly: props.selectedEvent.extendedProps.yearly,
+            yearly: isYearly,
             _id: props.selectedEvent.extendedProps._id
         }
         const response = await fetch('/api/event', {
@@ -63,6 +67,12 @@ function CalendarCreationModal(props) {
                 <div className="row">
                     <label for="event-desc">Event Description:</label>
                     <textarea id="edit-desc" name="edit-desc" rows="4" cols="50" defaultValue={props.selectedEvent.extendedProps.description}></textarea>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="yearlyEventCheck">
+                        Yearly Event
+                    </label>
+                    <input class="form-check-input" type="checkbox" value="" id="yearlyEventCheck" checked={isYearly} onClick={toggleYearly}/>
                 </div>
                 <button className="btn btn-primary" onClick={editEvent}>{eventEditLoading ? <CircularProgress color="black" /> : eventEditDone ? <DoneIcon /> : "Save Edit"} </button>
             </div>
