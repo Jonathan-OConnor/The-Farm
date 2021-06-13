@@ -32,7 +32,8 @@ function Calendar() {
             }).then(res => res.json())
             // add yearly recurring events
             const yearlyArray = addYearlies(eventList)
-            const final = [...eventList, ...yearlyArray]
+            const oldYearlyArray = addYearliesPast(eventList)
+            const final = [...eventList, ...yearlyArray, ...oldYearlyArray]
             setEvents(final)
             setLoading(false)
         }
@@ -48,6 +49,28 @@ function Calendar() {
                 const endString = eventList[i].date.substring(4, eventList[i].date.length)
                 for (var j = 1; j < 31; j++) {
                     const newYear = startYear + j
+                    const newDate = newYear.toString() + endString
+                    const event = {
+                        date: newDate,
+                        title: eventList[i].title,
+                        description: eventList[i].description,
+                        _id: eventList[i]._id,
+                        yearly: eventList[i].yearly
+                    }
+                    yearlyArray.push(event)
+                }
+            }
+        }
+        return yearlyArray
+    }
+    function addYearliesPast(eventList){
+        const yearlyArray = []
+        for (var i = 0; i < eventList.length; i++) {
+            if (eventList[i].yearly) {
+                const startYear = parseInt(eventList[i].date.substring(0, 4))
+                const endString = eventList[i].date.substring(4, eventList[i].date.length)
+                for (var j = 1; j < 31; j++) {
+                    const newYear = startYear - j
                     const newDate = newYear.toString() + endString
                     const event = {
                         date: newDate,
@@ -78,7 +101,8 @@ function Calendar() {
 
     function addEvent(newEvent) {
         const newYearly = addYearlies([newEvent])
-        setEvents([...events, newEvent, ...newYearly])
+        const oldYearly = addYearliesPast([newEvent])
+        setEvents([...events, newEvent, ...newYearly, ...oldYearly])
     }
 
     // editing modal functions
@@ -91,11 +115,11 @@ function Calendar() {
         setOpenEditing(false)
     }
     async function updateEvent(event){
-        console.log('running')
         const temp = await removeChanged(event)
         console.log(temp)
         setEvents(temp)
     }
+    
     function removeChanged(event){
         const temp = []
         for (var i = 0; i < events.length; i++){
@@ -104,7 +128,8 @@ function Calendar() {
             }
         }
         const temp2 = addYearlies([event])
-        return [...temp, event, ...temp2]
+        const temp3 = addYearliesPast([event])
+        return [...temp, event, ...temp2, ...temp3]
     }
 
     function closeEditModal() {
