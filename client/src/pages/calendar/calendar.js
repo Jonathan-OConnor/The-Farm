@@ -78,7 +78,6 @@ function Calendar() {
 
     function addEvent(newEvent) {
         const newYearly = addYearlies([newEvent])
-        console.log(newYearly)
         setEvents([...events, newEvent, ...newYearly])
     }
 
@@ -90,6 +89,26 @@ function Calendar() {
     }
     function handleEditingClose(){
         setOpenEditing(false)
+    }
+    async function updateEvent(event){
+        console.log('running')
+        const temp = await removeChanged(event)
+        console.log(temp)
+        setEvents(temp)
+    }
+    function removeChanged(event){
+        const temp = []
+        for (var i = 0; i < events.length; i++){
+            if (events[i]._id !== event._id){
+                temp.push(events[i])
+            }
+        }
+        const temp2 = addYearlies([event])
+        return [...temp, event, ...temp2]
+    }
+
+    function closeEditModal() {
+        setTimeout(() => { setOpenEditing(false) }, 300)
     }
     // component render
     return (
@@ -115,7 +134,7 @@ function Calendar() {
                 <Modal
                     open={openEditing}
                     onClose={handleEditingClose}>
-                    <CalendarEditModal selectedEvent={selectedEvent}/>
+                    <CalendarEditModal selectedEvent={selectedEvent} updateEvent={updateEvent} closeModal={closeEditModal}/>
                 </Modal>
             </div>
         </div >

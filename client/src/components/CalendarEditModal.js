@@ -51,7 +51,10 @@ function CalendarCreationModal(props) {
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
-   
+        setEventEditLoading(false)
+        props.updateEvent(data)
+        props.closeModal()
+        setEventEditDone(true)
     }
    
 
