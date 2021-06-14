@@ -17,6 +17,11 @@ function router(app, API_URL, STATIC_PATH) {
        res.send({status, message})
        console.log('updated entry')
    })
+   app.delete('/api/event', async function(req, res){
+       const {status, message} = await orm.deleteEvent(req.body)
+       res.send({status, message})
+       console.log('event deleted')
+   })
 }
 
 

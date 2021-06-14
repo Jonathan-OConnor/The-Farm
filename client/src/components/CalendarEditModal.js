@@ -7,6 +7,8 @@ function CalendarCreationModal(props) {
 
     const [eventEditLoading, setEventEditLoading] = useState(false)
     const [eventEditDone, setEventEditDone] = useState(false)
+    const [eventDeleteLoading, setEventDeleteLoading] = useState(false)
+    const [eventDeleteDone, setEventDeleteDone] = useState(false)
     const [isYearly, setIsYearly] = useState(props.selectedEvent.extendedProps.yearly)
     const [modalStyle, setModalStyle] = useState(getModalStyle)
     // modal styling
@@ -56,7 +58,26 @@ function CalendarCreationModal(props) {
         props.closeModal()
         setEventEditDone(true)
     }
-   
+   async function deleteEvent(){
+    setEventDeleteLoading(true)
+    const data={
+        _id: props.selectedEvent.extendedProps._id
+    }
+    const response = await fetch('/api/event', {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json',
+            'Session': localStorage.session || ''
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json())
+    if (response.status){
+        setEventDeleteLoading(false)
+        props.deleteEvent(data)
+        props.closeModal()
+        setEventDeleteDone(true)
+    }
+   }
 
     return (
         <div style={modalStyle} className={classes.paper}>
@@ -78,6 +99,7 @@ function CalendarCreationModal(props) {
                     <input class="form-check-input" type="checkbox" value="" id="yearlyEventCheck" checked={isYearly} onClick={toggleYearly}/>
                 </div>
                 <button className="btn btn-primary" onClick={editEvent}>{eventEditLoading ? <CircularProgress color="black" /> : eventEditDone ? <DoneIcon /> : "Save Edit"} </button>
+                <button className="btn btn-danger" onClick={deleteEvent}>{eventDeleteLoading ? <CircularProgress color="black" /> : eventDeleteDone ? <DoneIcon /> : "Delete Event"} </button>
             </div>
         </div>
     )

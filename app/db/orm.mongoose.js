@@ -21,7 +21,7 @@ async function createEvent(eventData) {
         status: true,
         message: "Event successfully registered",
         eventData: {
-            id: savedEvent._id,
+            _id: savedEvent._id,
             date: savedEvent.date,
             title: savedEvent.title,
             description: savedEvent.description,
@@ -61,8 +61,24 @@ async function updateEvent(eventData) {
         }
     }
 }
+
+async function deleteEvent(eventData){
+    const deleted = await db.events.deleteOne({"_id": ObjectId(eventData._id)})
+    if (deleted.deletedCount == 1){
+        return {
+            status: true,
+            message: "Event was deleted successfully",
+        }
+    } else {
+        return {
+            status: false,
+            message: "there was a problem",
+        }
+    }
+}
 module.exports = {
     createEvent,
     getAllEvents,
-    updateEvent
+    updateEvent,
+    deleteEvent
 }

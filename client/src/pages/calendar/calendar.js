@@ -47,7 +47,7 @@ function Calendar() {
             if (eventList[i].yearly) {
                 const startYear = parseInt(eventList[i].date.substring(0, 4))
                 const endString = eventList[i].date.substring(4, eventList[i].date.length)
-                for (var j = 1; j < 31; j++) {
+                for (var j = 1; j < 51; j++) {
                     const newYear = startYear + j
                     const newDate = newYear.toString() + endString
                     const event = {
@@ -69,7 +69,7 @@ function Calendar() {
             if (eventList[i].yearly) {
                 const startYear = parseInt(eventList[i].date.substring(0, 4))
                 const endString = eventList[i].date.substring(4, eventList[i].date.length)
-                for (var j = 1; j < 31; j++) {
+                for (var j = 1; j < 51; j++) {
                     const newYear = startYear - j
                     const newDate = newYear.toString() + endString
                     const event = {
@@ -107,7 +107,6 @@ function Calendar() {
 
     // editing modal functions
     function openEditingModal(info){
-        console.log(info.event)
         setSelectedEvent(info.event)
         setOpenEditing(true)
     }
@@ -116,7 +115,6 @@ function Calendar() {
     }
     async function updateEvent(event){
         const temp = await removeChanged(event)
-        console.log(temp)
         setEvents(temp)
     }
     
@@ -134,6 +132,16 @@ function Calendar() {
 
     function closeEditModal() {
         setTimeout(() => { setOpenEditing(false) }, 300)
+    }
+
+    function deleteEvent(event){
+        const temp = []
+        for (var i = 0; i < events.length; i++){
+            if (events[i]._id !== event._id){
+                temp.push(events[i])
+            }
+        }
+        setEvents(temp)
     }
     // component render
     return (
@@ -159,7 +167,7 @@ function Calendar() {
                 <Modal
                     open={openEditing}
                     onClose={handleEditingClose}>
-                    <CalendarEditModal selectedEvent={selectedEvent} updateEvent={updateEvent} closeModal={closeEditModal}/>
+                    <CalendarEditModal selectedEvent={selectedEvent} updateEvent={updateEvent} deleteEvent={deleteEvent} closeModal={closeEditModal}/>
                 </Modal>
             </div>
         </div >
