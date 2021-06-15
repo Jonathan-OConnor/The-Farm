@@ -11,6 +11,7 @@ function CalendarCreationModal(props) {
     const [eventDeleteDone, setEventDeleteDone] = useState(false)
     const [isYearly, setIsYearly] = useState(props.selectedEvent.extendedProps.yearly)
     const [modalStyle, setModalStyle] = useState(getModalStyle)
+    
     // modal styling
     function getModalStyle() {
         return {

@@ -8,22 +8,30 @@ function Navbar(props) {
                 return (<div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                     <a class="nav-link" href="/calendar">Calendar</a>
+                    <a class="nav-link" href="/emailer">Emailer</a>
                 </div>)
-         
+
             case "calendar":
                 return (<div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="/">Home</a>
                     <a class="nav-link active" href="/calendar">Calendar</a>
+                    <a class="nav-link" href="/emailer">Emailer</a>
                 </div>)
-                
-            default: 
-                return(<div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
-                <a class="nav-link " href="/calendar">Calendar</a>
-            </div>)
+            case "emailer":
+                return (<div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="/calendar">Calendar</a>
+                    <a class="nav-link active" href="/emailer">Emailer</a>
+                </div>)
+            default:
+                return (<div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link " href="/calendar">Calendar</a>
+                    <a class="nav-link" href="/emailer">Emailer</a>
+                </div>)
         }
-
     }
+
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -31,7 +39,6 @@ function Navbar(props) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              
                     {active()}
                 </div>
             </div>
