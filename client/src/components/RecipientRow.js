@@ -16,6 +16,12 @@ function RecipientRow(props) {
     function toggle(){
         props.toggle()
         setIsSelected(!isSelected)
+     
+        if (!isSelected){
+            props.addRecipient(props.recipient)
+        } else{
+            props.removeRecipient(props.recipient)
+        }   
     }
     return (
         <div class="form-check">

@@ -13,10 +13,13 @@ function Emailer() {
     const [emailLoding, setEmailLoading] = useState(false)
     const [emailSent, setEmailSent] = useState(false)
     const [openRecipients, setOpenRecipients] = useState(false)
+    const [allRecipients, setAllRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
+    const [recipients, setRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
+
 
     function sendEmail() {
         setEmailLoading(true)
-        return
+        console.log(recipients)
     }
 
     function openModal() {
@@ -25,6 +28,9 @@ function Emailer() {
 
     function closeModal(){
         setOpenRecipients(false)
+    }
+    function setEmailees(list){
+        setRecipients(list)
     }
     return (
         <div>
@@ -47,7 +53,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal />
+                        <ReciepientModal setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients}/>
                     </Modal>
                 </div>
             </Grow>

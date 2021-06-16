@@ -6,20 +6,11 @@ import RecipientRow from "./RecipientRow";
 
 function ReciepientModal(props) {
     const [modalStyle, setModalStyle] = useState(getModalStyle)
-    const [recipientList, setReciepientList] = useState([])
-    const [allSelected, setAllSelected] = useState(false)
-    const [noneSelected, setNoneSelected] = useState(true)
+    const [allSelected, setAllSelected] = useState(true)
+    const [noneSelected, setNoneSelected] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [doneSaving, setDoneSaving] = useState(false)
-
-    useEffect(() => {
-        async function getRecipients() {
-            const recipients = ["test@test.com", "test2@test.com", "test3@test.com"]
-            setReciepientList(recipients)
-        }
-        getRecipients()
-
-    }, [])
+    const [recipients, setRecipients] = useState(props.recipients)
 
     // styles
     function getModalStyle() {
@@ -45,9 +36,15 @@ function ReciepientModal(props) {
     // helper functions 
     function buildRecipients() {
         const final = []
-        for (var i = 0; i < recipientList.length; i++) {
+        for (var i = 0; i < props.allRecipients.length; i++) {
             final.push(
-                <RecipientRow recipient={recipientList[i]} allSelected={allSelected} noneSelected={noneSelected} toggle={toggle} />
+                <RecipientRow
+                    recipient={props.allRecipients[i]}
+                    allSelected={allSelected}
+                    noneSelected={noneSelected}
+                    toggle={toggle}
+                    addRecipient={addRecipient}
+                    removeRecipient={removeRecipient} />
             )
         }
         return final
@@ -55,18 +52,36 @@ function ReciepientModal(props) {
     function selectAllRecipients() {
         setNoneSelected(false)
         setAllSelected(true)
-
+        setRecipients(props.allRecipients)
     }
     function selectNoRecipients() {
         setAllSelected(false)
         setNoneSelected(true)
+        setRecipients([])
     }
     function toggle() {
         setAllSelected(false)
         setNoneSelected(false)
     }
-    function saveRecipients(){
+    function saveRecipients() {
         setIsSaving(true)
+        props.setEmailees(recipients)
+    }
+
+    function addRecipient(selectedEmail) {
+        setRecipients([...recipients, selectedEmail])
+        console.log(recipients)
+    }
+    function removeRecipient(selectedEmail) {
+     
+        const temp = []
+         for (var i = 0; i < recipients.length; i++) {
+            if (recipients[i] !== selectedEmail) {
+                temp.push(recipients[i])
+            }
+        }
+        setRecipients(temp)
+        console.log(recipients)
     }
 
     // component render
@@ -77,9 +92,9 @@ function ReciepientModal(props) {
                 <button onClick={selectAllRecipients}> Select All</button>
                 <button onClick={selectNoRecipients}> Deselect All</button>
             </div>
-        
+
             {buildRecipients()}
-          
+
             <div className="d-flex mb-3">
                 <button className="btn btn-primary ms-auto" onClick={saveRecipients}>{isSaving ? <CircularProgress color="black" /> : doneSaving ? <DoneIcon /> : "Save Edit"} </button>
             </div>
