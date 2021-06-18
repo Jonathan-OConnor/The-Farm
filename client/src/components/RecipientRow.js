@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react"
 function RecipientRow(props) {
 
     const [isSelected, setIsSelected] = useState(false)
+    const [isNotRecipient, setIsNotRecipient] = useState(props.notSelected)
+
 
     useEffect(() => {
         if (props.allSelected) {
@@ -12,11 +14,16 @@ function RecipientRow(props) {
         if (props.noneSelected) {
             setIsSelected(false)
         }
-    }, [props.allSelected, props.noneSelected])
+        if (isNotRecipient){
+            setIsSelected(false)
+        }
+    }, [props.allSelected, props.noneSelected, props.notSelected])
+
     function toggle(){
         props.toggle()
+        setIsNotRecipient(!isNotRecipient)
         setIsSelected(!isSelected)
-     
+
         if (!isSelected){
             props.addRecipient(props.recipient)
         } else{

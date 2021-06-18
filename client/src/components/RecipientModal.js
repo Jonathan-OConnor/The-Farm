@@ -37,15 +37,30 @@ function ReciepientModal(props) {
     function buildRecipients() {
         const final = []
         for (var i = 0; i < props.allRecipients.length; i++) {
-            final.push(
-                <RecipientRow
-                    recipient={props.allRecipients[i]}
-                    allSelected={allSelected}
-                    noneSelected={noneSelected}
-                    toggle={toggle}
-                    addRecipient={addRecipient}
-                    removeRecipient={removeRecipient} />
-            )
+            if (props.recipients.includes(props.allRecipients[i])) {
+                final.push(
+                    <RecipientRow
+                        recipient={props.allRecipients[i]}
+                        allSelected={allSelected}
+                        noneSelected={noneSelected}
+                        toggle={toggle}
+                        addRecipient={addRecipient}
+                        removeRecipient={removeRecipient}
+                        notSelected={false} />
+                )
+            } else {
+                final.push(
+                    <RecipientRow
+                        recipient={props.allRecipients[i]}
+                        allSelected={allSelected}
+                        noneSelected={noneSelected}
+                        toggle={toggle}
+                        addRecipient={addRecipient}
+                        removeRecipient={removeRecipient}
+                        notSelected={true} />
+                )
+            }
+
         }
         return final
     }
@@ -73,9 +88,9 @@ function ReciepientModal(props) {
         console.log(recipients)
     }
     function removeRecipient(selectedEmail) {
-     
+
         const temp = []
-         for (var i = 0; i < recipients.length; i++) {
+        for (var i = 0; i < recipients.length; i++) {
             if (recipients[i] !== selectedEmail) {
                 temp.push(recipients[i])
             }
