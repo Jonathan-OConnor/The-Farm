@@ -15,6 +15,7 @@ function Emailer() {
     const [openRecipients, setOpenRecipients] = useState(false)
     const [allRecipients, setAllRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
     const [recipients, setRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
+    const [allSelected, setAllSelected] = useState(true)
 
 
     function sendEmail() {
@@ -31,6 +32,9 @@ function Emailer() {
     }
     function setEmailees(list){
         setRecipients(list)
+    }
+    function changeSelected(){
+        setAllSelected(false)
     }
     return (
         <div>
@@ -53,7 +57,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients}/>
+                        <ReciepientModal setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected}/>
                     </Modal>
                 </div>
             </Grow>

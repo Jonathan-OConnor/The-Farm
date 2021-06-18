@@ -6,7 +6,7 @@ import RecipientRow from "./RecipientRow";
 
 function ReciepientModal(props) {
     const [modalStyle, setModalStyle] = useState(getModalStyle)
-    const [allSelected, setAllSelected] = useState(true)
+    const [allSelected, setAllSelected] = useState(props.allSelected)
     const [noneSelected, setNoneSelected] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [doneSaving, setDoneSaving] = useState(false)
@@ -37,7 +37,7 @@ function ReciepientModal(props) {
     function buildRecipients() {
         const final = []
         for (var i = 0; i < props.allRecipients.length; i++) {
-            if (props.recipients.includes(props.allRecipients[i])) {
+            if (allSelected) {
                 final.push(
                     <RecipientRow
                         recipient={props.allRecipients[i]}
@@ -46,20 +46,46 @@ function ReciepientModal(props) {
                         toggle={toggle}
                         addRecipient={addRecipient}
                         removeRecipient={removeRecipient}
-                        notSelected={false} />
+                        selected={true} />
+                )
+            } else if (noneSelected) {
+                final.push(
+                    <RecipientRow
+                        recipient={props.allRecipients[i]}
+                        allSelected={allSelected}
+                        noneSelected={noneSelected}
+                        toggle={toggle}
+                        addRecipient={addRecipient}
+                        removeRecipient={removeRecipient}
+                        selected={false} />
                 )
             } else {
-                final.push(
-                    <RecipientRow
-                        recipient={props.allRecipients[i]}
-                        allSelected={allSelected}
-                        noneSelected={noneSelected}
-                        toggle={toggle}
-                        addRecipient={addRecipient}
-                        removeRecipient={removeRecipient}
-                        notSelected={true} />
-                )
+                if (props.recipients.includes(props.allRecipients[i])) {
+                    final.push(
+                        <RecipientRow
+                            recipient={props.allRecipients[i]}
+                            allSelected={allSelected}
+                            noneSelected={noneSelected}
+                            toggle={toggle}
+                            addRecipient={addRecipient}
+                            removeRecipient={removeRecipient}
+                            selected={true} />
+                    )
+                } else {
+
+                    final.push(
+                        <RecipientRow
+                            recipient={props.allRecipients[i]}
+                            allSelected={allSelected}
+                            noneSelected={noneSelected}
+                            toggle={toggle}
+                            addRecipient={addRecipient}
+                            removeRecipient={removeRecipient}
+                            selected={false} />
+                    )
+                }
             }
+
 
         }
         return final
@@ -81,6 +107,9 @@ function ReciepientModal(props) {
     function saveRecipients() {
         setIsSaving(true)
         props.setEmailees(recipients)
+        if (recipients !== props.allRecipients) {
+            props.changeSelected()
+        }
     }
 
     function addRecipient(selectedEmail) {

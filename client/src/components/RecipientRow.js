@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react"
 
 function RecipientRow(props) {
 
-    const [isSelected, setIsSelected] = useState(false)
-    const [isNotRecipient, setIsNotRecipient] = useState(props.notSelected)
-
+    const [isSelected, setIsSelected] = useState(props.selected)
+  
 
     useEffect(() => {
         if (props.allSelected) {
@@ -14,14 +13,10 @@ function RecipientRow(props) {
         if (props.noneSelected) {
             setIsSelected(false)
         }
-        if (isNotRecipient){
-            setIsSelected(false)
-        }
-    }, [props.allSelected, props.noneSelected, props.notSelected])
-
+   
+    }, [props.allSelected, props.noneSelected])
     function toggle(){
         props.toggle()
-        setIsNotRecipient(!isNotRecipient)
         setIsSelected(!isSelected)
 
         if (!isSelected){
