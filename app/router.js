@@ -22,6 +22,11 @@ function router(app, API_URL, STATIC_PATH) {
        res.send({status, message})
        console.log('event deleted')
    })
+   app.post('/api/emails', async function(req, res){
+    const {status, message, emailData} = await orm.addEmail(req.body)
+    res.send({status, message, emailData})
+    console.log(`email: ${emailData.email} saved`)
+   })
 }
 
 

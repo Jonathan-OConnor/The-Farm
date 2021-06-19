@@ -27,18 +27,35 @@ function Emailer() {
         setOpenRecipients(true)
     }
 
-    function closeModal(){
+    function closeModal() {
         setOpenRecipients(false)
     }
-    function setEmailees(list){
+    function setEmailees(list) {
         setRecipients(list)
     }
-    function changeSelected(){
+    function changeSelected() {
         setAllSelected(false)
     }
-    function addEmail(newEmail){
-        setAllRecipients([...allRecipients, newEmail])
-        setRecipients([...recipients, newEmail])
+    async function addEmail(newEmail) {
+        const data = {
+            email: newEmail
+        }
+        const response = await fetch('/api/emails', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session': localStorage.session || ''
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+        if (response.status) {
+            setAllRecipients([...allRecipients, newEmail])
+            setRecipients([...recipients, newEmail])
+        } else {
+            console.log('error in saving email')
+        }
+
+
     }
     return (
         <div>
@@ -61,7 +78,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected}/>
+                        <ReciepientModal addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected} />
                     </Modal>
                 </div>
             </Grow>

@@ -76,9 +76,29 @@ async function deleteEvent(eventData){
         }
     }
 }
+
+async function addEmail(emailObject){
+    const saveData = {
+        email: emailObject.email
+    }
+    const savedEmail = await db.emails.create(saveData)
+    if (!savedEmail._id) {
+        return { status: false, message: "failed to create email entry" }
+    }
+    return {
+        status: true,
+        message: "Email successfully saved",
+        emailData: {
+            _id: savedEmail._id,
+            email: savedEmail.email,
+            dateAdded: savedEmail.dateAdded
+        }
+    }
+}
 module.exports = {
     createEvent,
     getAllEvents,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    addEmail
 }
