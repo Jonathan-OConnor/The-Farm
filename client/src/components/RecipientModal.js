@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Button } from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done';
 import RecipientRow from "./RecipientRow";
 
@@ -11,6 +11,7 @@ function ReciepientModal(props) {
     const [isSaving, setIsSaving] = useState(false)
     const [doneSaving, setDoneSaving] = useState(false)
     const [recipients, setRecipients] = useState(props.recipients)
+    const [addingEmail, setAddingEmail] = useState(false)
 
     // styles
     function getModalStyle() {
@@ -90,11 +91,13 @@ function ReciepientModal(props) {
         }
         return final
     }
+
     function selectAllRecipients() {
         setNoneSelected(false)
         setAllSelected(true)
         setRecipients(props.allRecipients)
     }
+
     function selectNoRecipients() {
         setAllSelected(false)
         setNoneSelected(true)
@@ -114,10 +117,9 @@ function ReciepientModal(props) {
 
     function addRecipient(selectedEmail) {
         setRecipients([...recipients, selectedEmail])
-        console.log(recipients)
     }
-    function removeRecipient(selectedEmail) {
 
+    function removeRecipient(selectedEmail) {
         const temp = []
         for (var i = 0; i < recipients.length; i++) {
             if (recipients[i] !== selectedEmail) {
@@ -125,9 +127,16 @@ function ReciepientModal(props) {
             }
         }
         setRecipients(temp)
-        console.log(recipients)
     }
 
+    function isAddingEmail() {
+        setAddingEmail(true)
+    }
+    function saveEmail(){
+        const newEmail = document.getElementById("emailAddition").value
+        props.addEmail(newEmail)
+        setAddingEmail(false)
+    }
     // component render
     return (
         <div style={modalStyle} className={classes.paper}>
@@ -138,9 +147,17 @@ function ReciepientModal(props) {
             </div>
 
             {buildRecipients()}
-
+            {addingEmail ?
+                <div>
+                    <input id="emailAddition" type="text"></input> <Button color="primary" onClick={saveEmail}>Save Email</Button>
+                </div>:
+                <Button color="primary" onClick={isAddingEmail}>Add Email</Button>
+            }
             <div className="d-flex mb-3">
-                <button className="btn btn-primary ms-auto" onClick={saveRecipients}>{isSaving ? <CircularProgress color="black" /> : doneSaving ? <DoneIcon /> : "Save Edit"} </button>
+                <button className="btn btn-primary ms-auto" onClick={saveRecipients}>{isSaving ?
+                    <CircularProgress color="black" /> :
+                    doneSaving ? <DoneIcon /> : "Save Edit"}
+                </button>
             </div>
         </div>)
 }

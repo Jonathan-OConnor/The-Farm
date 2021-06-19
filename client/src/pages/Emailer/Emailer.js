@@ -36,6 +36,10 @@ function Emailer() {
     function changeSelected(){
         setAllSelected(false)
     }
+    function addEmail(newEmail){
+        setAllRecipients([...allRecipients, newEmail])
+        setRecipients([...recipients, newEmail])
+    }
     return (
         <div>
             <Navbar active="Emailer" />
@@ -57,7 +61,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected}/>
+                        <ReciepientModal addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected}/>
                     </Modal>
                 </div>
             </Grow>
