@@ -10,6 +10,6 @@ files.forEach( function( filename ){
       db[filebase] = require(path.join(__dirname, filename))
    }
 })
-console.log(db)
+
 
 module.exports = db

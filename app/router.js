@@ -27,6 +27,11 @@ function router(app, API_URL, STATIC_PATH) {
     res.send({status, message, emailData})
     console.log(`email: ${emailData.email} saved`)
    })
+   app.get('/api/emails', async function(req, res){
+    const {status, message, emailList} = await orm.getAllEmails()
+    res.send({status, message, emailList})
+    console.log('sent email list')
+   })
 }
 
 

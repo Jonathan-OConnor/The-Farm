@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Grow from '@material-ui/core/Grow';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -13,10 +13,33 @@ function Emailer() {
     const [emailLoding, setEmailLoading] = useState(false)
     const [emailSent, setEmailSent] = useState(false)
     const [openRecipients, setOpenRecipients] = useState(false)
-    const [allRecipients, setAllRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
-    const [recipients, setRecipients] = useState(["test@test.com", "test2@test.com", "test3@test.com"])
+    const [allRecipients, setAllRecipients] = useState([])
+    const [recipients, setRecipients] = useState([])
     const [allSelected, setAllSelected] = useState(true)
 
+    useEffect(() => {
+        async function getEmails(){
+            const { status, message, emailList } = await fetch('/api/emails', {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Session': localStorage.session || ''
+                }
+            }).then(res => res.json())
+            if (status){
+                const parsedEmails=[]
+                for (var i = 0; i < emailList.length; i++){
+                    parsedEmails.push(emailList[i].email)
+                }
+                setAllRecipients(parsedEmails)
+                setRecipients(parsedEmails)
+            } else {
+                console.log("error retrieving emails")
+            }
+        }
+        getEmails()
+        console.log(allRecipients)
+    } , [])
 
     function sendEmail() {
         setEmailLoading(true)

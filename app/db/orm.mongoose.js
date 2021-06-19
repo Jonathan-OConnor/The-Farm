@@ -95,10 +95,19 @@ async function addEmail(emailObject){
         }
     }
 }
+async function getAllEmails(){
+    const emails = await db.emails.find()
+    return {
+        status: true,
+        message: "Successfully retrieved events",
+        emailList: emails
+    }
+}
 module.exports = {
     createEvent,
     getAllEvents,
     updateEvent,
     deleteEvent,
-    addEmail
+    addEmail,
+    getAllEmails
 }
