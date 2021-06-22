@@ -72,8 +72,8 @@ function Emailer() {
             body: JSON.stringify(data)
         }).then(res => res.json())
         if (response.status) {
-            setAllRecipients([...allRecipients, newEmail])
             setRecipients([...recipients, newEmail])
+            setAllRecipients([...allRecipients, newEmail])
         } else {
             console.log('error in saving email')
         }

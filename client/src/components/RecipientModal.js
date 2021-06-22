@@ -134,9 +134,12 @@ function ReciepientModal(props) {
     }
     function saveEmail(){
         const newEmail = document.getElementById("emailAddition").value
+        setRecipients([...recipients, newEmail])
         props.addEmail(newEmail)
         setAddingEmail(false)
+       
     }
+  
     // component render
     return (
         <div style={modalStyle} className={classes.paper}>
