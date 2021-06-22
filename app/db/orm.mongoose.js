@@ -103,11 +103,22 @@ async function getAllEmails(){
         emailList: emails
     }
 }
+
+async function deleteEmail(emailObject){
+    const email = emailObject.email
+    const response = await db.emails.deleteOne({email: email})
+    return {
+        status: true,
+        message: "Successfully retrieved events",
+        emailData: email
+    }
+}
 module.exports = {
     createEvent,
     getAllEvents,
     updateEvent,
     deleteEvent,
     addEmail,
-    getAllEmails
+    getAllEmails,
+    deleteEmail
 }

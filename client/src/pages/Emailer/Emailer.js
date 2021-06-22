@@ -79,7 +79,18 @@ function Emailer() {
         }
     }
 
-    function deleteEmail(selectedEmail) {
+    async function deleteEmail(selectedEmail) {
+        const data ={
+            email: selectedEmail
+        }
+        const response = await fetch('/api/emails', {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session': localStorage.session || ''
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
         const temp = []
         for (var i = 0; i < recipients.length; i++) {
             if (recipients[i] !== selectedEmail) {

@@ -32,6 +32,11 @@ function router(app, API_URL, STATIC_PATH) {
     res.send({status, message, emailList})
     console.log('sent email list')
    })
+   app.delete('/api/emails', async function(req, res){
+       const {status, message, emailData} = await orm.deleteEmail(req.body)
+       res.send({status, message})
+       console.log('deleted email')
+   })
 }
 
 
