@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Button } from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done';
+import CloseIcon from '@material-ui/icons/Close';
 import RecipientRow from "./RecipientRow";
 
 function ReciepientModal(props) {
@@ -48,8 +49,8 @@ function ReciepientModal(props) {
                         toggle={toggle}
                         addRecipient={addRecipient}
                         removeRecipient={removeRecipient}
-                        selected={true} 
-                        deleteEmail={props.deleteEmail}/>
+                        selected={true}
+                        deleteEmail={props.deleteEmail} />
                 )
             } else if (noneSelected) {
                 final.push(
@@ -118,6 +119,12 @@ function ReciepientModal(props) {
         if (recipients !== props.allRecipients) {
             props.changeSelected()
         }
+        setTimeout(() => {
+            setIsSaving(false);
+            setDoneSaving(true);
+            setTimeout(props.closeModal, 400)
+        }, 400)
+
     }
 
     function addRecipient(selectedEmail) {
@@ -137,15 +144,17 @@ function ReciepientModal(props) {
     function isAddingEmail() {
         setAddingEmail(true)
     }
-    function saveEmail(){
+    function saveEmail() {
         const newEmail = document.getElementById("emailAddition").value
         setRecipients([...recipients, newEmail])
         props.addEmail(newEmail)
         setAddingEmail(false)
-       
+    }
+    function closeAddingEmail() {
+        setAddingEmail(false)
     }
 
- 
+
     // component render
     return (
         <div style={modalStyle} className={classes.paper}>
@@ -158,8 +167,8 @@ function ReciepientModal(props) {
             {buildRecipients()}
             {addingEmail ?
                 <div>
-                    <input id="emailAddition" type="text"></input> <Button color="primary" onClick={saveEmail}>Save Email</Button>
-                </div>:
+                    <input id="emailAddition" type="text"></input> <Button color="primary" onClick={saveEmail}>Save Email</Button><Button onClick={closeAddingEmail}><CloseIcon /></Button>
+                </div> :
                 <Button color="primary" onClick={isAddingEmail}>Add Email</Button>
             }
             <div className="d-flex mb-3">

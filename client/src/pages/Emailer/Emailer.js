@@ -127,7 +127,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal deleteEmail={deleteEmail} addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected} />
+                        <ReciepientModal closeModal={closeModal} deleteEmail={deleteEmail} addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected} />
                     </Modal>
                 </div>
             </Grow>
