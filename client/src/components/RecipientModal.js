@@ -13,6 +13,7 @@ function ReciepientModal(props) {
     const [recipients, setRecipients] = useState(props.recipients)
     const [addingEmail, setAddingEmail] = useState(false)
 
+
     // styles
     function getModalStyle() {
         return {
@@ -47,7 +48,8 @@ function ReciepientModal(props) {
                         toggle={toggle}
                         addRecipient={addRecipient}
                         removeRecipient={removeRecipient}
-                        selected={true} />
+                        selected={true} 
+                        deleteEmail={props.deleteEmail}/>
                 )
             } else if (noneSelected) {
                 final.push(
@@ -58,7 +60,8 @@ function ReciepientModal(props) {
                         toggle={toggle}
                         addRecipient={addRecipient}
                         removeRecipient={removeRecipient}
-                        selected={false} />
+                        selected={false}
+                        deleteEmail={props.deleteEmail} />
                 )
             } else {
                 if (props.recipients.includes(props.allRecipients[i])) {
@@ -70,7 +73,8 @@ function ReciepientModal(props) {
                             toggle={toggle}
                             addRecipient={addRecipient}
                             removeRecipient={removeRecipient}
-                            selected={true} />
+                            selected={true}
+                            deleteEmail={props.deleteEmail} />
                     )
                 } else {
 
@@ -82,7 +86,8 @@ function ReciepientModal(props) {
                             toggle={toggle}
                             addRecipient={addRecipient}
                             removeRecipient={removeRecipient}
-                            selected={false} />
+                            selected={false}
+                            deleteEmail={props.deleteEmail} />
                     )
                 }
             }
@@ -139,7 +144,8 @@ function ReciepientModal(props) {
         setAddingEmail(false)
        
     }
-  
+
+ 
     // component render
     return (
         <div style={modalStyle} className={classes.paper}>

@@ -18,7 +18,7 @@ function Emailer() {
     const [allSelected, setAllSelected] = useState(true)
 
     useEffect(() => {
-        async function getEmails(){
+        async function getEmails() {
             const { status, message, emailList } = await fetch('/api/emails', {
                 method: 'get',
                 headers: {
@@ -26,9 +26,9 @@ function Emailer() {
                     'Session': localStorage.session || ''
                 }
             }).then(res => res.json())
-            if (status){
-                const parsedEmails=[]
-                for (var i = 0; i < emailList.length; i++){
+            if (status) {
+                const parsedEmails = []
+                for (var i = 0; i < emailList.length; i++) {
                     parsedEmails.push(emailList[i].email)
                 }
                 setAllRecipients(parsedEmails)
@@ -39,7 +39,7 @@ function Emailer() {
         }
         getEmails()
         console.log(allRecipients)
-    } , [])
+    }, [])
 
     function sendEmail() {
         setEmailLoading(true)
@@ -77,8 +77,23 @@ function Emailer() {
         } else {
             console.log('error in saving email')
         }
+    }
 
-
+    function deleteEmail(selectedEmail) {
+        const temp = []
+        for (var i = 0; i < recipients.length; i++) {
+            if (recipients[i] !== selectedEmail) {
+                temp.push(recipients[i])
+            }
+        }
+        setRecipients(temp)
+        const temp2 = []
+        for (var i = 0; i < allRecipients.length; i++) {
+            if (allRecipients[i] !== selectedEmail) {
+                temp2.push(allRecipients[i])
+            }
+        }
+        setAllRecipients(temp2)
     }
     return (
         <div>
@@ -101,7 +116,7 @@ function Emailer() {
                     <Modal
                         open={openRecipients}
                         onClose={closeModal}>
-                        <ReciepientModal addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected} />
+                        <ReciepientModal deleteEmail={deleteEmail} addEmail={addEmail} setEmailees={setEmailees} recipients={recipients} allRecipients={allRecipients} allSelected={allSelected} changeSelected={changeSelected} />
                     </Modal>
                 </div>
             </Grow>
