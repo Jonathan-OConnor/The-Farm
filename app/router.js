@@ -48,13 +48,12 @@ function router(app, API_URL, STATIC_PATH, transporter, mailOptions) {
     transporter.sendMail(mailOptions, function (err, data) {
         if (err) {
             console.log("Error " + err);
-            res.status(500).send({message:"This is an error"})
+            res.status(500).send({status: false, message:"This is an error"})
         } else {
             console.log("Email sent successfully");
-            res.send({message: "Email sent"});
+            res.send({status: true, message: "Email sent"});
         }
     });
-    res.send({message: "Email Sent"})
   
 })
 }

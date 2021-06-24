@@ -9,13 +9,16 @@ import ReciepientModal from "../../components/RecipientModal";
 import "./Emailer.css"
 
 function Emailer() {
-
+    const [emailSubject, setEmailSubject] = useState("")
+    const [emailBody, setEmailBody] = useState("")
     const [emailLoding, setEmailLoading] = useState(false)
     const [emailSent, setEmailSent] = useState(false)
+    const [emailError, setEmailError] = useState(false)
     const [openRecipients, setOpenRecipients] = useState(false)
     const [allRecipients, setAllRecipients] = useState([])
     const [recipients, setRecipients] = useState([])
     const [allSelected, setAllSelected] = useState(true)
+
 
     useEffect(() => {
         async function getEmails() {
@@ -45,8 +48,8 @@ function Emailer() {
         setEmailLoading(true)
         const data = {
             mailList: recipients,
-            subject: "test",
-            msg: "this is a test"
+            subject: emailSubject,
+            msg: emailBody
         }
         console.log(recipients)
         const response = await fetch('/api/email', {
@@ -57,6 +60,12 @@ function Emailer() {
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
+        setEmailLoading(false)
+        if (response.status){
+            setEmailSent(true)
+        } else {
+            setEmailError(true)
+        }
 
     }
 
@@ -120,6 +129,12 @@ function Emailer() {
         }
         setAllRecipients(temp2)
     }
+    function handleSubjectChange(e){
+        setEmailSubject(e.target.value)
+    }
+    function handleBodyChange(e){
+        setEmailBody(e.target.value)
+    }
     return (
         <div>
             <Navbar active="Emailer" />
@@ -131,14 +146,16 @@ function Emailer() {
                         placeholder="Enter email subject here"
                         rows={3}
                         fullWidth
-                        variant="outlined" />
+                        variant="outlined"
+                        onChange={handleSubjectChange} />
                     <TextField
                         id="email-body"
                         placeholder="Enter your message here"
                         rows={30}
                         fullWidth
                         multiline
-                        variant="outlined" />
+                        variant="outlined" 
+                        onChange={handleBodyChange}/>
 
                     <div className="d-flex mb-3" style={{ height: '50px' }}>
                         <button className="btn btn-primary" onClick={sendEmail}>{emailLoding ? <CircularProgress color="black" /> : emailSent ? <DoneIcon /> : "Submit"} </button>
