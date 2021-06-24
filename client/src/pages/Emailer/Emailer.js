@@ -112,6 +112,12 @@ function Emailer() {
             <Grow in={true}>
                 <div className="container">
                     <h1>Send an Email</h1>
+                       <TextField
+                        id="email-header"
+                        placeholder="Enter email subject here"
+                        rows={3}
+                        fullWidth
+                        variant="outlined" />
                     <TextField
                         id="email-body"
                         placeholder="Enter your message here"

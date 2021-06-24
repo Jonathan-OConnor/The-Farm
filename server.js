@@ -3,6 +3,7 @@ const express = require('express')
 const apiRouter = require('./app/router')
 const path = require('path')
 const app = express()
+const nodemailer= require('nodemailer')
 
 const PORT = process.env.PORT || 8080
 const API_URL = process.env.NODE_ENV === 'production' ?
@@ -18,7 +19,23 @@ app.use(express.json())
 // static paths (ex. assets, js, images, etc) served automatically from:
 app.use(express.static(STATIC_PATH))
 
-apiRouter(app, API_URL, STATIC_PATH)
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD
+  }
+});
+
+const mailOptions = {
+  from: process.env.MAIL_USERNAME,
+  to: process.env.MAIL_RECIEVER_USERNAME,
+  subject: 'Message from your Website',
+  text: ''
+};
+
+apiRouter(app, API_URL, STATIC_PATH, transporter, mailOptions)
 
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
@@ -26,8 +43,6 @@ if (process.env.NODE_ENV === 'production') {
   })
   console.log('!! Be sure to run "npm run build" to prepare production react code!')
 }
-
-
 
 app.listen(PORT, function () {
   console.log(`Serving app on: ${API_URL} (port: ${PORT})`)
