@@ -1,6 +1,6 @@
 const orm = require("./db/orm.mongoose")
 
-function router(app, API_URL, STATIC_PATH) {
+function router(app, API_URL, STATIC_PATH, transporter, mailOptions) {
    app.post('/api/event', async function(req, res){
        const {status, message, eventData} = await orm.createEvent(req.body)
        res.send({status, message, eventData})
@@ -37,6 +37,26 @@ function router(app, API_URL, STATIC_PATH) {
        res.send({status, message})
        console.log('deleted email')
    })
+
+   app.post('/api/email', async function (req, res) {
+    const msg = req.body.msg
+    const mailList = req.body.mailList
+    const subject = req.body.subject
+    mailOptions.text = msg
+    mailOptions.to = mailList
+    mailOptions.subject = subject
+    transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            console.log("Error " + err);
+            res.status(500).send({message:"This is an error"})
+        } else {
+            console.log("Email sent successfully");
+            res.send({message: "Email sent"});
+        }
+    });
+    res.send({message: "Email Sent"})
+  
+})
 }
 
 

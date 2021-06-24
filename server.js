@@ -30,8 +30,8 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: process.env.MAIL_USERNAME,
-  to: process.env.MAIL_RECIEVER_USERNAME,
-  subject: 'Message from your Website',
+  to: [],
+  subject: '',
   text: ''
 };
 

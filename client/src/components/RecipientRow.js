@@ -45,7 +45,7 @@ function RecipientRow(props) {
                 <input class="form-check-input" type="checkbox" value="" id={`${props.recipient}`} checked={isSelected} onClick={toggle} />
                 {isDeleting ?
                     <div>
-                        <p style={{ color: "red" }}>Are you sure?</p>
+                        <p style={{ color: "red" }}>Are you sure you want to permanently delete this email?</p>
                         <Button color="secondary" onClick={deleteEmail}>Yes</Button>
                         <Button color="secondary" onClick={cancelDelete}>No</Button>
                     </div>

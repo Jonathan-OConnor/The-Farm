@@ -41,9 +41,23 @@ function Emailer() {
         console.log(allRecipients)
     }, [])
 
-    function sendEmail() {
+    async function sendEmail() {
         setEmailLoading(true)
+        const data = {
+            mailList: recipients,
+            subject: "test",
+            msg: "this is a test"
+        }
         console.log(recipients)
+        const response = await fetch('/api/email', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session': localStorage.session || ''
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+
     }
 
     function openModal() {
@@ -80,7 +94,7 @@ function Emailer() {
     }
 
     async function deleteEmail(selectedEmail) {
-        const data ={
+        const data = {
             email: selectedEmail
         }
         const response = await fetch('/api/emails', {
@@ -112,7 +126,7 @@ function Emailer() {
             <Grow in={true}>
                 <div className="container">
                     <h1>Send an Email</h1>
-                       <TextField
+                    <TextField
                         id="email-header"
                         placeholder="Enter email subject here"
                         rows={3}
