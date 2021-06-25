@@ -1,7 +1,18 @@
+.homePageBanner{
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: 100vh;
+ 
+
+}
 #TitleBlock{
     background-color: #E6AE35;
 }
-
+#farmLogo{
+  max-height: 500px;
+  padding-top: 50px;
+}
 .fade-in-section {
     opacity: 0;
     transform: translateY(20vh);
