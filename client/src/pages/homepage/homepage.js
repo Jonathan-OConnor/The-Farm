@@ -8,7 +8,7 @@ function Homepage() {
     return (
         <div >
             <Navbar active="home" />
-            <div className="homePageBanner d-flex justify-content-center" style={{backgroundImage: `url("images/interior1.jpg")`}}>
+            <div className="homePageBanner d-flex justify-content-center" style={{backgroundImage: `url("images/landingpage.jpg")`}}>
                 <img src="images/logo.png" alt="Farm Logo" id="farmLogo"/>
             </div>
        
