@@ -49,6 +49,7 @@ function ReciepientModal(props) {
                     console.log("ALL SELECTED")
                     final.push(
                         <RecipientRow
+                            key={"email_" + `${i}`}
                             recipient={props.allRecipients[i]}
                             allSelected={allSelected}
                             noneSelected={noneSelected}
@@ -62,6 +63,7 @@ function ReciepientModal(props) {
                     console.log("None SELECTED")
                     final.push(
                         <RecipientRow
+                            key={"email_" + `${i}`}
                             recipient={props.allRecipients[i]}
                             allSelected={allSelected}
                             noneSelected={noneSelected}
@@ -77,6 +79,7 @@ function ReciepientModal(props) {
                         if (recipients[j].email === props.allRecipients[i].email) {
                             final.push(
                                 <RecipientRow
+                                    key={"email_" + `${i}`}
                                     recipient={props.allRecipients[i]}
                                     allSelected={allSelected}
                                     noneSelected={noneSelected}
@@ -94,6 +97,7 @@ function ReciepientModal(props) {
                         console.log("DOES NOT CONTAIN")
                         final.push(
                             <RecipientRow
+                                key={"email_" + `${i}`}
                                 recipient={props.allRecipients[i]}
                                 allSelected={allSelected}
                                 noneSelected={noneSelected}
@@ -118,8 +122,8 @@ function ReciepientModal(props) {
         setNoneSelected(false)
         setAllSelected(true)
         const temp = []
-        for (var i = 0; i < props.allRecipients.length; i++){
-            if (props.allRecipients[i].group === emailList){
+        for (var i = 0; i < props.allRecipients.length; i++) {
+            if (props.allRecipients[i].group === emailList) {
                 temp.push(props.allRecipients[i])
             }
         }
@@ -137,7 +141,13 @@ function ReciepientModal(props) {
     }
     function saveRecipients() {
         setIsSaving(true)
-        props.setEmailees(recipients)
+        const temp = []
+        for (var i = 0; i < recipients.length; i++) {
+            if (recipients[i].group === emailList) {
+                temp.push(recipients[i])
+            }
+        }
+        props.setEmailees(temp)
         if (recipients !== props.allRecipients) {
             props.changeSelected()
         }
@@ -151,7 +161,7 @@ function ReciepientModal(props) {
 
     function addRecipient(selectedEmail) {
         setRecipients([...recipients, selectedEmail])
-    
+
     }
 
     function removeRecipient(selectedEmail) {
@@ -162,7 +172,7 @@ function ReciepientModal(props) {
             }
         }
         setRecipients(temp)
-     
+
     }
 
     function isAddingEmail() {
@@ -180,10 +190,8 @@ function ReciepientModal(props) {
 
     function updateList(e) {
         setEmailList(e.target.value)
-        setRecipients([])
-        setNoneSelected(true)
         setAllSelected(false)
-
+        setNoneSelected(false)
     }
 
     // component render

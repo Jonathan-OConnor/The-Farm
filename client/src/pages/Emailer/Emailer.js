@@ -35,6 +35,7 @@ function Emailer() {
                     parsedEmails.push(emailList[i])
                 }
                 setAllRecipients(parsedEmails)
+                setRecipients(parsedEmails)
             } else {
                 console.log("error retrieving emails")
             }
