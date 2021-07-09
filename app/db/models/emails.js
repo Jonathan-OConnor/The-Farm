@@ -10,6 +10,10 @@ const emails = new Schema(
         email: {
             type: String,
             trim: true
+        },
+        group: {
+            type: String,
+            trim: true
         }
     }
 )

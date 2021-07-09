@@ -32,10 +32,9 @@ function Emailer() {
             if (status) {
                 const parsedEmails = []
                 for (var i = 0; i < emailList.length; i++) {
-                    parsedEmails.push(emailList[i].email)
+                    parsedEmails.push(emailList[i])
                 }
                 setAllRecipients(parsedEmails)
-                setRecipients(parsedEmails)
             } else {
                 console.log("error retrieving emails")
             }
@@ -51,7 +50,6 @@ function Emailer() {
             subject: emailSubject,
             msg: emailBody
         }
-        console.log(recipients)
         const response = await fetch('/api/email', {
             method: 'post',
             headers: {
@@ -84,7 +82,8 @@ function Emailer() {
     }
     async function addEmail(newEmail) {
         const data = {
-            email: newEmail
+            email: newEmail.email,
+            group: newEmail.group
         }
         const response = await fetch('/api/emails', {
             method: 'post',

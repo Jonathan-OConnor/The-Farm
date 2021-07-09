@@ -39,10 +39,10 @@ function RecipientRow(props) {
         <div>
 
             <div class="form-check">
-                <label class="form-check-label" for={`${props.recipient}`}>
-                    {props.recipient}
+                <label class="form-check-label" for={`${props.recipient.email}`}>
+                    {props.recipient.email}
                 </label>
-                <input class="form-check-input" type="checkbox" value="" id={`${props.recipient}`} checked={isSelected} onClick={toggle} />
+                <input class="form-check-input" type="checkbox" value="" id={`${props.recipient.email}`} checked={isSelected} onChange={toggle} />
                 {isDeleting ?
                     <div>
                         <p style={{ color: "red" }}>Are you sure you want to permanently delete this email?</p>

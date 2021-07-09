@@ -79,7 +79,8 @@ async function deleteEvent(eventData){
 
 async function addEmail(emailObject){
     const saveData = {
-        email: emailObject.email
+        email: emailObject.email,
+        group: emailObject.group
     }
     const savedEmail = await db.emails.create(saveData)
     if (!savedEmail._id) {
