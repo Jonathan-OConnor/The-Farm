@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
@@ -12,7 +12,7 @@ function Homepage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        
+
         async function getEvents() {
             const { status, message, eventList } = await fetch('/api/event', {
                 method: 'get',
@@ -117,17 +117,18 @@ function Homepage() {
                     </div>
                 </div>
             </div>
-            <div style={{ paddingTop: "50px"}}>
+            <div style={{ paddingTop: "50px" }}>
                 <h1 className="text-center sectionTitle">Upcoming Events</h1>
                 <div className="container">
-                {loading ? <CircularProgress /> : <FullCalendar
+                    {loading ? <CircularProgress /> : <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
                         events={events}
-                  
                     />}
                 </div>
-
+                <div className="container">
+                    <a href="/login">User Page</a>
+                </div>
             </div>
 
         </div>
