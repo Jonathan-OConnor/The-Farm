@@ -6,8 +6,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
 import Navbar from "../../components/Navbar"
-import CalendarCreationModal from "../../components/CalendarCreationModal"
-import CalendarEditModal from "../../components/CalendarEditModal"
+import CalendarCreationModal from "../../components/Calendar/CalendarCreationModal"
+import CalendarEditModal from "../../components/Calendar/CalendarEditModal"
 import "./calendar.css"
 
 

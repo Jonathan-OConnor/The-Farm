@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DoneIcon from '@material-ui/icons/Done'
 import Modal from '@material-ui/core/Modal';
 import Navbar from "../../components/Navbar"
-import ReciepientModal from "../../components/RecipientModal";
+import ReciepientModal from "../../components/Emailer/RecipientModal";
 import "./Emailer.css"
 
 function Emailer() {
