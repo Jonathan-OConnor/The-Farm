@@ -1,6 +1,11 @@
-import React from "react"
+import React, {useState} from "react"
+import {Redirect} from 'react-router-dom'
 import "./Login.css"
+
 function Login(props) {
+    const [authed, setAuthed] = useState(props.isAuthed)
+    const [remember, setRemember] = useState(false)
+
     async function attemptLogin() {
         const username = document.getElementById("username").value
         const password = document.getElementById("password").value
@@ -17,8 +22,19 @@ function Login(props) {
             body: JSON.stringify(body)
         }).then(res => res.json())
         console.log(response.status)
+        if (response.status){
+            if (remember){
+                localStorage.setItem('uuid', response.uuid)
+            } else {
+                sessionStorage.setItem('uuid', response.uuid)
+            }
+            props.setIsAuthed(true)
+            setAuthed(true)
+        }
     }
-
+    function toggleRemember(){
+        setRemember(!remember)
+    }
     return (
         <div className="vertical-center">
             <div className="container">
@@ -35,12 +51,12 @@ function Login(props) {
                     <label for="password">Password</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="remember"></input>
+                    <input type="checkbox" id="remember" onClick={toggleRemember}></input>
                     <label for="remember">Remember Me</label>
                 </div>
                 <button className="btn btn-primary" onClick={attemptLogin}>Log In</button>
             </div>
-
+            {authed ?  <Redirect to={{ pathname: '/', state: { from: props.location } }} /> : ""}
         </div>
     )
 }

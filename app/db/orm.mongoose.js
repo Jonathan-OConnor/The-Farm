@@ -127,7 +127,7 @@ async function login(loginInfo) {
     const findUser = await db.users.findOne({ username: loginInfo.username })
     if (findUser) {
         if (bcrypt.compareSync(loginInfo.password, findUser.password)) {
-            return { status: true, message: "login successful", session: "test" }
+            return { status: true, message: "login successful", uuid: findUser.uuid }
         } else {
             console.log('rejected password')
             return { status: false, message: "make sure username and password are correct" }

@@ -12,6 +12,10 @@ const users = new Schema(
             type: String,
             trim: true
         },
+        uuid: {
+            type: String,
+            trim: true
+        }
     }
 )
 

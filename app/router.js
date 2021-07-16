@@ -60,11 +60,15 @@ function router(app, API_URL, STATIC_PATH, transporter, mailOptions) {
 
     })
     // login api requests
-    app.put('/api/login', async function (req, res){
-        const {status, message, session} = await orm.login(req.body)
-        res.send({status: status, message: message, session: session || ""})
+    app.put('/api/login', async function (req, res) {
+        const { status, message, uuid } = await orm.login(req.body)
+        res.send({ status: status, message: message, uuid: uuid || "" })
     })
 
+    app.put('/api/verify', async function (req, res) {
+        const {status, message} = await orm.verify(req.body)
+        res.send({status: status, message: message})
+    })
 }
 
 

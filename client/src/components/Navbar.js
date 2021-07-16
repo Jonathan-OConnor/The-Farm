@@ -1,34 +1,34 @@
 
 import React from "react"
-
+import {Link} from "react-router-dom"
 function Navbar(props) {
     function active() {
         switch (props.active) {
             case "home":
                 return (<div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    <a class="nav-link" href="/calendar">Calendar</a>
-                    <a class="nav-link" href="/emailer">Emailer</a>
+                    <Link class="nav-link active" aria-current="page" to="/">Home</Link>
+                    <Link class="nav-link" to="/calendar">Calendar</Link>
+                    <Link class="nav-link" to="/emailer">Emailer</Link>
                 </div>)
 
             case "calendar":
                 return (<div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                    <a class="nav-link active" href="/calendar">Calendar</a>
-                    <a class="nav-link" href="/emailer">Emailer</a>
-                </div>)
+                <Link class="nav-link" aria-current="page" to="/">Home</Link>
+                <Link class="nav-link active" to="/calendar">Calendar</Link>
+                <Link class="nav-link" to="/emailer">Emailer</Link>
+            </div>)
             case "emailer":
                 return (<div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                    <a class="nav-link" href="/calendar">Calendar</a>
-                    <a class="nav-link active" href="/emailer">Emailer</a>
-                </div>)
+                <Link class="nav-link" aria-current="page" to="/">Home</Link>
+                <Link class="nav-link " to="/calendar">Calendar</Link>
+                <Link class="nav-link active" to="/emailer">Emailer</Link>
+            </div>)
             default:
                 return (<div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                    <a class="nav-link " href="/calendar">Calendar</a>
-                    <a class="nav-link" href="/emailer">Emailer</a>
-                </div>)
+                <Link class="nav-link" aria-current="page" to="/">Home</Link>
+                <Link class="nav-link " to="/calendar">Calendar</Link>
+                <Link class="nav-link" to="/emailer">Emailer</Link>
+            </div>)
         }
     }
 
