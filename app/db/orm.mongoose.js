@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
 const ObjectId = require('mongodb').ObjectID
+const {v4: uuidv4} = require('uuid')
 
 const db = require('./models')
 const salt = bcrypt.genSaltSync(13)
@@ -127,14 +128,18 @@ async function login(loginInfo) {
     const findUser = await db.users.findOne({ username: loginInfo.username })
     if (findUser) {
         if (bcrypt.compareSync(loginInfo.password, findUser.password)) {
-            return { status: true, message: "login successful", uuid: findUser.uuid }
+            const newUUID = uuidv4()
+            const newDate = Date()
+            const updateUUID = await db.users.updateOne({_id: ObjectId(findUser._id)}, {$set: {uuid: newUUID}})
+            const updateSessionDate = await db.users.updateOne({_id: ObjectId(findUser._id)}, {$set: {sessionDate: JSON.stringify(newDate)}})
+            return { status: true, message: "login successful", uuid: newUUID, sessionDate: JSON.stringify(newDate) }
         } else {
             console.log('rejected password')
-            return { status: false, message: "make sure username and password are correct" }
+            return { status: false, message: "make sure username and password are correct", uuid: "", sessionDate: ""}
         }
     } else {
         console.log('rejected username')
-        return { status: false, message: "make sure username and password are correct" }
+        return { status: false, message: "make sure username and password are correct", uuid: "", sessionDate: "" }
     }
 }
 

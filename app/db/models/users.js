@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 
 const users = new Schema(
     {
-
         username: {
             type: String,
             trim: true
@@ -15,6 +14,9 @@ const users = new Schema(
         uuid: {
             type: String,
             trim: true
+        },
+        sessionDate:{
+            type: Date
         }
     }
 )

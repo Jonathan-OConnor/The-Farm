@@ -25,8 +25,10 @@ function Login(props) {
         if (response.status){
             if (remember){
                 localStorage.setItem('uuid', response.uuid)
+                localStorage.setItem('sessionDate', response.sessionDate)
             } else {
                 sessionStorage.setItem('uuid', response.uuid)
+                sessionStorage.setItem('sessionDate', response.uuid)
             }
             props.setIsAuthed(true)
             setAuthed(true)
