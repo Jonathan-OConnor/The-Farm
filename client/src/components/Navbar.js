@@ -34,8 +34,15 @@ function Navbar(props) {
                 </div>)
         }
     }
-    function logout(){
+    function logout() {
+        if (localStorage.uuid) {
+            localStorage.removeItem('uuid')
+        }
+        if (sessionStorage.uuid) {
+            sessionStorage.removeItem('uuid')
+        }
         props.setIsAuthed(false)
+   
     }
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
