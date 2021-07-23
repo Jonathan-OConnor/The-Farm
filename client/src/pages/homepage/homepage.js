@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Navbar from "../../components/Navbar"
 import "./homepage.css"
 
-function Homepage() {
+function Homepage(props) {
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -78,7 +78,7 @@ function Homepage() {
     }
     return (
         <div >
-            <Navbar active="home" />
+            <Navbar active="home" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
             <div className="homePageBanner" style={{ backgroundImage: `url("images/landingpage.jpg")` }}>
 
                 <div className="row d-flex justify-content-center">

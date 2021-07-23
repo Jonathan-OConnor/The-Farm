@@ -42,7 +42,7 @@ function App() {
          <Route
             {...rest}
             render={(props) => authed === true
-               ? <Component {...props} />
+               ? <Component isAuthed={authed} setIsAuthed={setIsAuthed}/>
                : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
          />
       )
@@ -50,9 +50,11 @@ function App() {
 
    return (
       <BrowserRouter>
-         <Route exact path='/' component={Homepage} />
-         <PrivateRoute path='/calendar' component={Calendar} authed={isAuthed} />
-         <PrivateRoute path='/emailer' component={Emailer} authed={isAuthed} />
+         <Route exact path='/' render={(props) => (
+            <Homepage setIsAuthed={setIsAuthed} isAuthed={isAuthed} />
+         )}/>
+         <PrivateRoute exact path='/calendar' component={Calendar} authed={isAuthed} />
+         <PrivateRoute exact path='/emailer' component={Emailer} authed={isAuthed} />
          <Route exact path='/login' render={(props) => (
             <Login setIsAuthed={setIsAuthed} isAuthed={isAuthed} />
          )} />

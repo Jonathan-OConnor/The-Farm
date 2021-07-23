@@ -9,9 +9,10 @@ import Navbar from "../../components/Navbar"
 import CalendarCreationModal from "../../components/Calendar/CalendarCreationModal"
 import CalendarEditModal from "../../components/Calendar/CalendarEditModal"
 import "./calendar.css"
+import { PromiseProvider } from 'mongoose';
 
 
-function Calendar() {
+function Calendar(props) {
 
     // react state initialization
     const [loading, setLoading] = useState(true)
@@ -146,7 +147,7 @@ function Calendar() {
     // component render
     return (
         <div>
-            <Navbar active="calendar" />
+            <Navbar active="calendar" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
             <div className="container">
                 <Grow in={true}>
                     {loading ? <CircularProgress /> : <FullCalendar

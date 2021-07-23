@@ -8,7 +8,7 @@ import Navbar from "../../components/Navbar"
 import ReciepientModal from "../../components/Emailer/RecipientModal";
 import "./Emailer.css"
 
-function Emailer() {
+function Emailer(props) {
     const [emailSubject, setEmailSubject] = useState("")
     const [emailBody, setEmailBody] = useState("")
     const [emailLoding, setEmailLoading] = useState(false)
@@ -137,7 +137,7 @@ function Emailer() {
     }
     return (
         <div>
-            <Navbar active="Emailer" />
+            <Navbar active="Emailer" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
             <Grow in={true}>
                 <div className="container">
                     <h1>Send an Email</h1>

@@ -138,6 +138,13 @@ async function login(loginInfo) {
     }
 }
 
+async function verify(uuid){
+    const findUser = await db.users.findOne({uuid: uuid})
+    if (findUser){
+        return 
+    }
+}
+
 module.exports = {
     createEvent,
     getAllEvents,
@@ -147,4 +154,5 @@ module.exports = {
     getAllEmails,
     deleteEmail,
     login,
+    verify
 }
