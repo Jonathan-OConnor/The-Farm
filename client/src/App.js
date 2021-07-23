@@ -14,24 +14,40 @@ function App() {
 
    useEffect(() => {
       async function verify() {
+         console.log("running")
          if (localStorage.getItem('uuid')) {
+            const body = {
+               uuid: localStorage.getItem('uuid'),
+               sessionDate: localStorage.getItem('sessionDate')
+            }
             const response = await fetch('/api/verify', {
                method: 'put',
                headers: {
                   'Content-Type': 'application/json',
                   'Session': localStorage.session || '',
                },
-               body: JSON.stringify(localStorage.getItem('uuid'))
+               body: JSON.stringify(body)
             }).then(res => res.json())
+            if (response.status){
+               setIsAuthed(true)
+            }
          } else if (sessionStorage.getItem('uuid')) {
+            const body = {
+               uuid: sessionStorage.getItem('uuid'),
+               sessionDate: sessionStorage.getItem('sessionDate')
+            }
             const response = await fetch('/api/verify', {
                method: 'put',
                headers: {
                   'Content-Type': 'application/json',
                   'Session': localStorage.session || '',
                },
-               body: JSON.stringify(sessionStorage.getItem('uuid'))
+               body: JSON.stringify(body)
             }).then(res => res.json())
+            console.log(response)
+            if (response.status){
+               setIsAuthed(true)
+            }
          }
       }
       verify()

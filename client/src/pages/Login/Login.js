@@ -28,7 +28,7 @@ function Login(props) {
                 localStorage.setItem('sessionDate', response.sessionDate)
             } else {
                 sessionStorage.setItem('uuid', response.uuid)
-                sessionStorage.setItem('sessionDate', response.uuid)
+                sessionStorage.setItem('sessionDate', response.sessionDate)
             }
             props.setIsAuthed(true)
             setAuthed(true)

@@ -143,10 +143,14 @@ async function login(loginInfo) {
     }
 }
 
-async function verify(uuid){
-    const findUser = await db.users.findOne({uuid: uuid})
-    if (findUser){
-        return 
+async function verify(body){
+    const findUser = await db.users.findOne({uuid: body.uuid})
+    console.log(findUser.sessionDate.valueOf())
+    console.log(Date.parse(body.sessionDate))
+    if (findUser && findUser.sessionDate.valueOf() == Date.parse(body.sessionDate)){
+        return {status: true, message: "session exists"}
+    } else {
+        return {status: false, message: "unable to verify user"}
     }
 }
 
