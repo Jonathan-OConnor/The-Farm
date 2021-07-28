@@ -78,9 +78,8 @@ function Homepage(props) {
     }
     return (
         <div >
-            <Navbar active="home" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
+            <Navbar active="home" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed} />
             <div className="homePageBanner" style={{ backgroundImage: `url("images/landingpage.jpg")` }}>
-
                 <div className="row d-flex justify-content-center">
                     <div style={{ width: "30vw" }}>
                         <div className="" >
@@ -93,13 +92,12 @@ function Homepage(props) {
                                     </div>
                                     <h1 className="text-center sectionTitle">Welcome to the O'Connor Family Farm</h1>
                                 </div>
-
                             </Fade>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="ourHistory">
+            <div className="ourHistory" id="OurHistory">
                 <h1 className="text-center sectionTitle">Our History </h1>
                 <div className="container" >
                     <div className="row">
@@ -117,7 +115,7 @@ function Homepage(props) {
                     </div>
                 </div>
             </div>
-            <div style={{ paddingTop: "50px" }}>
+            <div style={{ paddingTop: "50px" }} id="UpcomingEvents">
                 <h1 className="text-center sectionTitle">Upcoming Events</h1>
                 <div className="container">
                     {loading ? <CircularProgress /> : <FullCalendar
@@ -126,11 +124,14 @@ function Homepage(props) {
                         events={events}
                     />}
                 </div>
-                <div className="container">
-                    <a href="/login">User Page</a>
-                </div>
-            </div>
 
+            </div>
+            <div className="PhotoGallerySection" id="Photos">
+                <h1 className="text-center sectionTitle">Photo Gallery </h1>
+            </div>
+            <div className="container">
+                <a href="/login">User Page</a>
+            </div>
         </div>
 
 

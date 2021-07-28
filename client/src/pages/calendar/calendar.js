@@ -9,7 +9,7 @@ import Navbar from "../../components/Navbar"
 import CalendarCreationModal from "../../components/Calendar/CalendarCreationModal"
 import CalendarEditModal from "../../components/Calendar/CalendarEditModal"
 import "./calendar.css"
-import { PromiseProvider } from 'mongoose';
+
 
 
 function Calendar(props) {
