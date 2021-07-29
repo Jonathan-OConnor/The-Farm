@@ -16,7 +16,6 @@ function router(app, API_URL, STATIC_PATH, transporter, mailOptions) {
 
     app.get('/api/event', async function (req, res) {
         const { status, message, eventList } = await orm.getAllEvents()
-        console.log(req.headers)
         res.send({ status, message, eventList })
         console.log('sent event list')
 
