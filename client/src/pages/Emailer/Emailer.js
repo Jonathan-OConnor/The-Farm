@@ -22,12 +22,16 @@ function Emailer(props) {
 
     useEffect(() => {
         async function getEmails() {
+            const data = {
+                uuid: localStorage.uuid || sessionStorage.uuid || '',
+                sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
+            }
             const { status, message, emailList } = await fetch('/api/emails', {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Session': localStorage.session || ''
-                }
+                    'Session': localStorage.uuid || sessionStorage.uuid || '',
+                },
             }).then(res => res.json())
             if (status) {
                 const parsedEmails = []
@@ -49,7 +53,9 @@ function Emailer(props) {
         const data = {
             mailList: recipients,
             subject: emailSubject,
-            msg: emailBody
+            msg: emailBody,
+            uuid: localStorage.uuid || sessionStorage.uuid || '',
+            sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
         }
         const response = await fetch('/api/email', {
             method: 'post',
@@ -84,13 +90,15 @@ function Emailer(props) {
     async function addEmail(newEmail) {
         const data = {
             email: newEmail.email,
-            group: newEmail.group
+            group: newEmail.group,
+            uuid: localStorage.uuid || sessionStorage.uuid || '',
+            sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
         }
         const response = await fetch('/api/emails', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Session': localStorage.session || ''
+                'Session': localStorage.session || ""
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
@@ -104,7 +112,9 @@ function Emailer(props) {
 
     async function deleteEmail(selectedEmail) {
         const data = {
-            email: selectedEmail
+            email: selectedEmail,
+            uuid: localStorage.uuid || sessionStorage.uuid || '',
+            sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
         }
         const response = await fetch('/api/emails', {
             method: 'delete',

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
 const ObjectId = require('mongodb').ObjectID
-const {v4: uuidv4} = require('uuid')
+const { v4: uuidv4 } = require('uuid')
 
 const db = require('./models')
 const salt = bcrypt.genSaltSync(13)
@@ -130,12 +130,12 @@ async function login(loginInfo) {
         if (bcrypt.compareSync(loginInfo.password, findUser.password)) {
             const newUUID = uuidv4()
             const newDate = Date()
-            const updateUUID = await db.users.updateOne({_id: ObjectId(findUser._id)}, {$set: {uuid: newUUID}})
-            const updateSessionDate = await db.users.updateOne({_id: ObjectId(findUser._id)}, {$set: {sessionDate: JSON.stringify(newDate)}})
+            const updateUUID = await db.users.updateOne({ _id: ObjectId(findUser._id) }, { $set: { uuid: newUUID } })
+            const updateSessionDate = await db.users.updateOne({ _id: ObjectId(findUser._id) }, { $set: { sessionDate: JSON.stringify(newDate) } })
             return { status: true, message: "login successful", uuid: newUUID, sessionDate: JSON.stringify(newDate) }
         } else {
             console.log('rejected password')
-            return { status: false, message: "make sure username and password are correct", uuid: "", sessionDate: ""}
+            return { status: false, message: "make sure username and password are correct", uuid: "", sessionDate: "" }
         }
     } else {
         console.log('rejected username')
@@ -143,14 +143,21 @@ async function login(loginInfo) {
     }
 }
 
-async function verify(body){
-    const findUser = await db.users.findOne({uuid: body.uuid})
-    console.log(findUser.sessionDate.valueOf())
-    console.log(Date.parse(body.sessionDate))
-    if (findUser && findUser.sessionDate.valueOf() == Date.parse(body.sessionDate)){
-        return {status: true, message: "session exists"}
+async function verify(body) {
+    const findUser = await db.users.findOne({ uuid: body.uuid })
+    if (findUser && findUser.sessionDate.valueOf() == Date.parse(body.sessionDate)) {
+        return { status: true, message: "session exists" }
     } else {
-        return {status: false, message: "unable to verify user"}
+        return { status: false, message: "unable to verify user" }
+    }
+}
+
+async function weakVerify(uuid) {
+    const findUser = await db.users.findOne({ uuid: body.uuid })
+    if (findUser) {
+        return { status: true, message: 'session exists' }
+    } else {
+        return { status: false, message: "unable to verify user" }
     }
 }
 
@@ -163,5 +170,6 @@ module.exports = {
     getAllEmails,
     deleteEmail,
     login,
-    verify
+    verify,
+    weakVerify
 }

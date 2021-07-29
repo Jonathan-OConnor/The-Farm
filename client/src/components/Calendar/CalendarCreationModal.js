@@ -33,18 +33,20 @@ function CalendarCreationModal(props) {
     const classes = useStyles();
 
     async function createEvent() {
-        const data = { 
-            date: props.selectedDate, 
-            title: document.getElementById("event-name").value, 
-            description: document.getElementById("event-desc").value ,
+        const data = {
+            date: props.selectedDate,
+            title: document.getElementById("event-name").value,
+            description: document.getElementById("event-desc").value,
             yearly: isYearly,
+            uuid: localStorage.uuid || sessionStorage.uuid || '',
+            sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
         }
         setEventCreationLoading(true)
         const response = await fetch('/api/event', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Session': localStorage.session || ''
+                'Session': localStorage.session || '',
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
@@ -60,7 +62,7 @@ function CalendarCreationModal(props) {
         }
     }
 
-    function toggleYearly(){
+    function toggleYearly() {
         isYearlyToggle(!isYearly)
     }
 
@@ -81,7 +83,7 @@ function CalendarCreationModal(props) {
                     <label class="form-check-label" for="yearlyEventCheck">
                         Yearly Event
                     </label>
-                    <input class="form-check-input" type="checkbox" value="" id="yearlyEventCheck" onClick={toggleYearly}/>
+                    <input class="form-check-input" type="checkbox" value="" id="yearlyEventCheck" onClick={toggleYearly} />
                 </div>
 
                 <button className="btn btn-primary" onClick={createEvent}>{eventCreationLoading ? <CircularProgress color="black" /> : eventCreationDone ? <DoneIcon /> : "Submit"} </button>

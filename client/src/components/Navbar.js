@@ -45,9 +45,11 @@ function Navbar(props) {
     function logout() {
         if (localStorage.uuid) {
             localStorage.removeItem('uuid')
+            localStorage.removeItem('sessionDate')
         }
         if (sessionStorage.uuid) {
             sessionStorage.removeItem('uuid')
+            sessionStorage.removeItem('sessionDate')
         }
         props.setIsAuthed(false)
 

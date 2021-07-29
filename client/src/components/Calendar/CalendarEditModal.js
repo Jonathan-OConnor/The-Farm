@@ -44,7 +44,9 @@ function CalendarCreationModal(props) {
             title: document.getElementById("edit-name").value, 
             description: document.getElementById("edit-desc").value,
             yearly: isYearly,
-            _id: props.selectedEvent.extendedProps._id
+            _id: props.selectedEvent.extendedProps._id,
+            uuid: localStorage.uuid || sessionStorage.uuid || '',
+            sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
         }
         const response = await fetch('/api/event', {
             method: 'put',
@@ -62,7 +64,9 @@ function CalendarCreationModal(props) {
    async function deleteEvent(){
     setEventDeleteLoading(true)
     const data={
-        _id: props.selectedEvent.extendedProps._id
+        _id: props.selectedEvent.extendedProps._id,
+        uuid: localStorage.uuid || sessionStorage.uuid || '',
+        sessionDate: localStorage.sessionDate || sessionStorage.sessionDate || ''
     }
     const response = await fetch('/api/event', {
         method: 'delete',
