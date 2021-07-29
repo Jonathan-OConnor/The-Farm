@@ -36,7 +36,7 @@
   color: white;
 }
 .PhotoGallerySection{
-  background-size: cover;
+    background-size: cover;
     clip-path: polygon(0 0, 0 100%, 100% calc(100% - 45px), 100% 45px);
     padding: 80px 0;
     min-width: 360px;

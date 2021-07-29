@@ -147,7 +147,10 @@ function Calendar(props) {
     // component render
     return (
         <div>
+            <div style={{marginBottom: "100px"}}>
             <Navbar active="calendar" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
+            </div>
+          
             <div className="container">
                 <Grow in={true}>
                     {loading ? <CircularProgress /> : <FullCalendar

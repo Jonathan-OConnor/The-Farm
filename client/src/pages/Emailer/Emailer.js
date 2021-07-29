@@ -60,7 +60,7 @@ function Emailer(props) {
             body: JSON.stringify(data)
         }).then(res => res.json())
         setEmailLoading(false)
-        if (response.status){
+        if (response.status) {
             setEmailSent(true)
         } else {
             setEmailError(true)
@@ -129,15 +129,17 @@ function Emailer(props) {
         }
         setAllRecipients(temp2)
     }
-    function handleSubjectChange(e){
+    function handleSubjectChange(e) {
         setEmailSubject(e.target.value)
     }
-    function handleBodyChange(e){
+    function handleBodyChange(e) {
         setEmailBody(e.target.value)
     }
     return (
         <div>
-            <Navbar active="Emailer" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed}/>
+            <div style={{ marginBottom: "100px" }}>
+                <Navbar active="emailer" isAuthed={props.isAuthed} setIsAuthed={props.setIsAuthed} />
+            </div>
             <Grow in={true}>
                 <div className="container">
                     <h1>Send an Email</h1>
@@ -154,8 +156,8 @@ function Emailer(props) {
                         rows={30}
                         fullWidth
                         multiline
-                        variant="outlined" 
-                        onChange={handleBodyChange}/>
+                        variant="outlined"
+                        onChange={handleBodyChange} />
 
                     <div className="d-flex mb-3" style={{ height: '50px' }}>
                         <button className="btn btn-primary" onClick={sendEmail}>{emailLoding ? <CircularProgress color="black" /> : emailSent ? <DoneIcon /> : "Submit"} </button>

@@ -115,7 +115,7 @@ function Homepage(props) {
                     </div>
                 </div>
             </div>
-            <div style={{ paddingTop: "50px" }} id="UpcomingEvents">
+            <div style={{ paddingTop: "50px", marginBottom: "50px" }} id="UpcomingEvents">
                 <h1 className="text-center sectionTitle">Upcoming Events</h1>
                 <div className="container">
                     {loading ? <CircularProgress /> : <FullCalendar
@@ -143,7 +143,7 @@ function Homepage(props) {
                                 <img src="/images/gallery1.jpeg" class="d-block w-100" alt="..." style={{ width: "1000px", height: "1000px" }} />
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/gallery2.jpeg" class="d-block" alt="..." style={{ width: "1000px", height: "1000px" }} />
+                                <img src="/images/gallery2.jpeg" class="d-block w-100" alt="..." style={{ width: "1000px", height: "1000px" }} />
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
