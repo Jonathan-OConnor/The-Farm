@@ -137,13 +137,13 @@ function Homepage(props) {
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="/images/gallery0.jpeg" class="d-block w-100" alt="gallery image 1" style={{ width: "1000px", height: "1000px" }} />
+                                <img src="/images/gallery0.jpeg" class="d-block w-100" alt="gallery image 1" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/gallery1.jpeg" class="d-block w-100" alt="..." style={{ width: "1000px", height: "1000px" }} />
+                                <img src="/images/gallery1.jpeg" class="d-block w-100" alt="..." style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
                             <div class="carousel-item">
-                                <img src="/images/gallery2.jpeg" class="d-block w-100" alt="..." style={{ width: "1000px", height: "1000px" }} />
+                                <img src="/images/gallery2.jpeg" class="d-block w-100" alt="..." style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

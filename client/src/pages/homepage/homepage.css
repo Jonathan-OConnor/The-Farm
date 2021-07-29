@@ -43,4 +43,6 @@
    background-image: linear-gradient(20deg, #512001, #281000);
 }
 
-
+.carousel-inner img {
+  margin: auto;
+}
