@@ -101,14 +101,20 @@ function Homepage(props) {
                 <h1 className="text-center sectionTitle">Our History </h1>
                 <div className="container" >
                     <div className="row">
-                        <div className="col-4" >
+                        <div className="col-4" style={{paddingRight: "50px"}}>
                             <img id="ourHistoryImage" src="/images/ourHistory.jpg" style={{ width: "100%" }} />
                         </div>
                         <div className="col-8" style={{ paddingTop: "50px" }}>
                             <p id="ourHistoryText">
                                 Our family tree traces its roots back to County Kerry, Ireland and our ancestors Maurice and Mary, who immigrated to Godmanchester in 1830. They made the Atlantic crossing with their sons Michael and James. Over the next few generations, the Irish community in Godmanchester would become concentrated along a region colloquially referred to as the Irish Ridge. Because the Irish shared religion, lifestyle, and dairy farming-derived work ethic with the French Québécois cohabiting the area, many families eventually intermarried. The Shamrock and Fleur de Lys, symbols of both cultures, found a place to flourish and prosper.
+                                <br />
+                                <br />
                                 In 1921, Patrick O’Connor and his spouse Stella Walsh purchased 110 acres from John Allan Smellie on the Irish Ridge, just west of Clyde Corners in Godmanchester, Quebec. They made their home here for three decades until 1951, when their son Walter and his wife Joan purchased the property. On their dairy farm, Walter and Joan raised nine children, instilling a strong work ethic and a reverence of family values.
+                                <br />
+                                <br />
                                 One hundred years have passed, and this homestead remains, resolute and restored. It has been the host of a myriad of memories and gatherings, and will be the place where new memories and gatherings happen. It has been the place that Walter and Joan’s children returned to time and time again, and will be the place that their grandchildren and great-grandchildren can find solace. It has been the place that we call home, and will be, always, “The Farm”.
+                                <br />
+                                <br />
                                 We celebrate our history by using this property to remember the sacrifice, effort and love it took to offer hope and pride for generations to come.
                             </p>
                         </div>
