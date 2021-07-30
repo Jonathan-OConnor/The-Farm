@@ -85,12 +85,12 @@ function Homepage(props) {
                         <div className="" >
                             <Fade in={true} timeout={1000}>
                                 <div>
-                                    <h1 className="text-center sectionTitle" style={{ marginTop: "200px" }}>Welcome to the O'Connor Family Farm</h1>
                                     <div className="row">
                                         <div className="col d-flex justify-content-center">
-                                            <img src="images/newBanner.png" alt="Farm Logo" id="farmLogo" style={{ marginTop: "50px" }} />
+                                            <img src="images/logo.png" alt="Farm Logo" id="farmLogo" />
                                         </div>
                                     </div>
+                                    <h1 className="text-center sectionTitle">Welcome to the O'Connor Family Farm</h1>
                                 </div>
                             </Fade>
                         </div>
@@ -98,10 +98,10 @@ function Homepage(props) {
                 </div>
             </div>
             <div className="ourHistory" id="OurHistory">
-                <h1 className="text-center sectionTitle">Our History </h1>
+                <h1 className="text-center sectionTitle">Our Story </h1>
                 <div className="container" >
                     <div className="row">
-                        <div className="col-4" style={{paddingRight: "50px"}}>
+                        <div className="col-4" style={{ paddingRight: "50px" }}>
                             <img id="ourHistoryImage" src="/images/ourHistory.jpg" style={{ width: "100%" }} />
                         </div>
                         <div className="col-8" style={{ paddingTop: "50px" }}>
