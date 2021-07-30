@@ -85,7 +85,7 @@ function Homepage(props) {
                         <div className="" >
                             <Fade in={true} timeout={1000}>
                                 <div>
-                                    <h1 className="text-center sectionTitle" style={{marginTop: "200px"}}>Welcome to the O'Connor Family Farm</h1>
+                                    <h1 className="text-center sectionTitle" style={{ marginTop: "200px" }}>Welcome to the O'Connor Family Farm</h1>
                                     <div className="row">
                                         <div className="col d-flex justify-content-center">
                                             <img src="images/newBanner.png" alt="Farm Logo" id="farmLogo" style={{ marginTop: "50px" }} />
@@ -106,11 +106,11 @@ function Homepage(props) {
                         </div>
                         <div className="col-8" style={{ paddingTop: "50px" }}>
                             <p id="ourHistoryText">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mauris mauris, vestibulum id imperdiet sed, finibus id nunc. Nunc auctor ac turpis nec ultrices. Phasellus in feugiat orci, at convallis nisi. Donec tincidunt et velit id imperdiet. Aliquam risus nibh, venenatis in scelerisque sit amet, bibendum non nisi. Sed maximus lacus vitae elementum facilisis. Integer quis mi dui.
-
-                                Donec hendrerit ipsum in nisl tincidunt fringilla. Morbi sollicitudin ex et lacus porttitor congue at quis augue. Maecenas id ultrices lectus. Curabitur urna arcu, tincidunt eu purus commodo, tempus ornare nunc. Vestibulum eget urna aliquet, cursus dui eu, rhoncus magna. In vitae nisl hendrerit, sagittis quam vel, porttitor lacus. In sit amet dui eu odio porttitor convallis ut vitae arcu. Donec tincidunt vehicula rhoncus. Nam semper, est quis eleifend placerat, magna mauris lobortis tellus, non sagittis nisl sapien ac leo.
-
-                                Pellentesque et sagittis urna. Aenean id sollicitudin dui, eget consequat orci. Sed sed hendrerit felis. Nunc et laoreet leo, in rutrum mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt a dolor vitae hendrerit. Nam a rutrum magna. Nam eget nisl in eros sagittis consequat ullamcorper vel velit. Sed aliquam leo sem, id vestibulum elit pellentesque at.</p>
+                                Our family tree traces its roots back to County Kerry, Ireland and our ancestors Maurice and Mary, who immigrated to Godmanchester in 1830. They made the Atlantic crossing with their sons Michael and James. Over the next few generations, the Irish community in Godmanchester would become concentrated along a region colloquially referred to as the Irish Ridge. Because the Irish shared religion, lifestyle, and dairy farming-derived work ethic with the French Québécois cohabiting the area, many families eventually intermarried. The Shamrock and Fleur de Lys, symbols of both cultures, found a place to flourish and prosper.
+                                In 1921, Patrick O’Connor and his spouse Stella Walsh purchased 110 acres from John Allan Smellie on the Irish Ridge, just west of Clyde Corners in Godmanchester, Quebec. They made their home here for three decades until 1951, when their son Walter and his wife Joan purchased the property. On their dairy farm, Walter and Joan raised nine children, instilling a strong work ethic and a reverence of family values.
+                                One hundred years have passed, and this homestead remains, resolute and restored. It has been the host of a myriad of memories and gatherings, and will be the place where new memories and gatherings happen. It has been the place that Walter and Joan’s children returned to time and time again, and will be the place that their grandchildren and great-grandchildren can find solace. It has been the place that we call home, and will be, always, “The Farm”.
+                                We celebrate our history by using this property to remember the sacrifice, effort and love it took to offer hope and pride for generations to come.
+                            </p>
                         </div>
                     </div>
                 </div>
