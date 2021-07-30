@@ -85,12 +85,12 @@ function Homepage(props) {
                         <div className="" >
                             <Fade in={true} timeout={1000}>
                                 <div>
+                                    <h1 className="text-center sectionTitle" style={{marginTop: "200px"}}>Welcome to the O'Connor Family Farm</h1>
                                     <div className="row">
                                         <div className="col d-flex justify-content-center">
-                                            <img src="images/logo.png" alt="Farm Logo" id="farmLogo" />
+                                            <img src="images/newBanner.png" alt="Farm Logo" id="farmLogo" style={{ marginTop: "50px" }} />
                                         </div>
                                     </div>
-                                    <h1 className="text-center sectionTitle">Welcome to the O'Connor Family Farm</h1>
                                 </div>
                             </Fade>
                         </div>
