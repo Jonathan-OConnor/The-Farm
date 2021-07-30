@@ -35,7 +35,7 @@ function Navbar(props) {
         }
         else {
             return(<div class="navbar-nav">
-            <a class="nav-link" href="#OurHistory">Our History</a>
+            <a class="nav-link" href="#OurHistory">Our Story</a>
             <a class="nav-link" href="#UpcomingEvents">Upcoming Events</a>
             <a class="nav-link" href="#Photos">Photos</a>
         </div>)
