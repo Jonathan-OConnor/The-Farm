@@ -45,7 +45,6 @@ function Emailer(props) {
             }
         }
         getEmails()
-        console.log(allRecipients)
     }, [])
 
     async function sendEmail() {

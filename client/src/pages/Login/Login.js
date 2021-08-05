@@ -21,7 +21,6 @@ function Login(props) {
             },
             body: JSON.stringify(body)
         }).then(res => res.json())
-        console.log(response.status)
         if (response.status){
             if (remember){
                 localStorage.setItem('uuid', response.uuid)

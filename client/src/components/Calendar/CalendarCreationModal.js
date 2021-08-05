@@ -55,7 +55,6 @@ function CalendarCreationModal(props) {
             setEventCreationError(true)
         } else {
             setEventCreationError(false)
-            console.log(response.eventData)
             props.addEvent(response.eventData)
             props.closeModal()
             setEventCreationDone(true)

@@ -14,7 +14,6 @@ function App() {
 
    useEffect(() => {
       async function verify() {
-         console.log("running")
          if (localStorage.getItem('uuid')) {
             const body = {
                uuid: localStorage.getItem('uuid'),
@@ -44,7 +43,6 @@ function App() {
                },
                body: JSON.stringify(body)
             }).then(res => res.json())
-            console.log(response)
             if (response.status){
                setIsAuthed(true)
             }
@@ -52,7 +50,6 @@ function App() {
       }
       verify()
    }, [])
-   console.log("isAuthed:", isAuthed)
    function PrivateRoute({ component: Component, authed, ...rest }) {
       return (
          <Route
