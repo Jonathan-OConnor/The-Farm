@@ -144,13 +144,12 @@ function Homepage(props) {
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7" aria-label="Slide 8"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8" aria-label="Slide 9a"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9" aria-label="Slide 9b"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="10" aria-label="Slide 10"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="11" aria-label="Slide 11"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="12" aria-label="Slide 12"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="13" aria-label="Slide 13"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7" aria-label="Slide 9a"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8" aria-label="Slide 9b"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9" aria-label="Slide 10"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="10" aria-label="Slide 11"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="11" aria-label="Slide 12"></button>
+                        
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -174,9 +173,7 @@ function Homepage(props) {
                             <div class="carousel-item">
                                 <img src="/images/gallery/g7.jpg" class="d-block w-100" alt="gallery 7" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
-                            <div class="carousel-item">
-                                <img src="/images/gallery/g8.jpg" class="d-block w-100" alt="gallery 8" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
-                            </div>
+                            
                             <div class="carousel-item">
                                 <img src="/images/gallery/g9.jpg" class="d-block w-100" alt="gallery 9a" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
@@ -191,9 +188,6 @@ function Homepage(props) {
                             </div>
                             <div class="carousel-item">
                                 <img src="/images/gallery/g12.jpg" class="d-block w-100" alt="gallery 12" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/images/gallery/g13.JPG" class="d-block w-100" alt="gallery 13" style={{ maxWidth: "1000px", maxHeight: "1000px" }} />
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
