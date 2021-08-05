@@ -41,7 +41,6 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
      res.sendFile(path.join(__dirname, './client/build/index.html'))
   })
-  console.log('!! Be sure to run "npm run build" to prepare production react code!')
 }
 
 app.listen(PORT, function () {
