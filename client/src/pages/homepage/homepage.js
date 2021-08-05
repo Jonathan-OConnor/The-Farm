@@ -206,11 +206,19 @@ function Homepage(props) {
                         </button>
                     </div>
                 </div>
+                <div className="row d-flex justify-content-center" style={{paddingTop: "100px"}}>
+                    <img src="/images/backup.png" style={{ maxWidth: "150px" }} />
+                </div>
+                <div className="row">
+                    <div className="d-flex justify-content-center">
+                        <a href="/login">User Page</a>
+                    </div>
+                </div>
+            </div>
+           
+               
+  
 
-            </div>
-            <div className="container">
-                <a href="/login">User Page</a>
-            </div>
         </div>
 
 
